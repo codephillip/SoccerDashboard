@@ -6,30 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class Predictions extends Fragment {
-
-    TextView textView;
-    Button button;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.predictions_layout, container, false);
-
-
-        textView = (TextView) rootView.findViewById(R.id.words);
-        button= (Button) rootView.findViewById(R.id.click);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setText("you have clicked");
-            }
-        });
-
 
 		return rootView;
 	}
