@@ -43,8 +43,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        String[] tabs = { "First Fragment", "Second Fragment",
-                "Third Fragment" };
+        String[] tabs = { "Predictions", "Tables",
+                "Fixtures" };
 
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)

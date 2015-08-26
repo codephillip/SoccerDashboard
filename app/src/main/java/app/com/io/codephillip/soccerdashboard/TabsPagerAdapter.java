@@ -14,11 +14,11 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int position) {
 		switch (position) {
 		case 0:
-			return new FirstFragment();
+			return new Predictions();
 		case 1:
-			return new SecondFragment();
+			return new Tables();
 		case 2:
-			return new ThirdFragment();
+			return new Fixtures();
 
 		default:
 			return null;

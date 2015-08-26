@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class FirstFragment extends Fragment {
+public class Predictions extends Fragment {
 
     TextView textView;
     Button button;
@@ -17,7 +17,7 @@ public class FirstFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.first_layout, container, false);
+		View rootView = inflater.inflate(R.layout.predictions_layout, container, false);
 
 
         textView = (TextView) rootView.findViewById(R.id.words);

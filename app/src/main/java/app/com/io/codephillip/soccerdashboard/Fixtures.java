@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ThirdFragment extends Fragment {
+public class Fixtures extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.third_layout, container, false);
+		View view = inflater.inflate(R.layout.fixtures_layout, container, false);
 		return view;
 	}
 }
