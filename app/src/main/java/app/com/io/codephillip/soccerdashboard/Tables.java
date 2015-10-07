@@ -24,6 +24,10 @@ public class Tables extends Fragment {
     private ListView tableList;
     private FetchTableTask fetchTableTask;
     ArrayAdapter <String>  adapter;
+    private final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
+    private final String imageUrls[] = {
+            "52919.png","2605445.png","2601593.png","75027.png","2603039.png","2606733.png"
+    };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,

@@ -1,0 +1,76 @@
+package app.com.io.codephillip.soccerdashboard;
+
+import android.app.Activity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+/**
+ * Created by codephillip on 9/26/15.
+ */
+public class TableListAdapter extends ArrayAdapter<String> {
+
+    private final Activity context;
+    private final String[] itemname;
+    private final Integer[] imgId;
+
+    public TableListAdapter(Activity context, String[] itemname, Integer[] imgId) {
+        super(context, R.layout.mylist, itemname);
+        this.context = context;
+        this.itemname = itemname;
+        this.imgId = imgId;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = context.getLayoutInflater();
+        View rowView = inflater.inflate(R.layout.mylist, null, true);
+
+        TextView txtTitle = (TextView) rowView.findViewById(R.id.teamname);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+        TextView points = (TextView) rowView.findViewById(R.id.points);
+        TextView teamPosition = (TextView) rowView.findViewById(R.id.teamposition);
+        TextView playedGames = (TextView) rowView.findViewById(R.id.playedgames);
+        TextView wins = (TextView) rowView.findViewById(R.id.wins);
+        TextView draws = (TextView) rowView.findViewById(R.id.draws);
+        TextView losses = (TextView) rowView.findViewById(R.id.losses);
+        TextView goalDifference = (TextView) rowView.findViewById(R.id.goaldifference);
+
+        try{
+            txtTitle.setText(itemname[position]);
+            imageView.setImageResource(imgId[position]);
+            position++;
+            teamPosition.setText(String.valueOf(position));
+            points.setText(String.valueOf(position));
+            position = 3;
+            playedGames.setText(String.valueOf(position));
+            wins.setText(String.valueOf(position));
+            draws.setText(String.valueOf(position));
+            losses.setText(String.valueOf(position));
+            goalDifference.setText(String.valueOf(position));
+        }catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
+            Log.d("ARRAY BUG", "ARRAY OUT OF BOUNDS EXCEPTION");
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            Log.d("NULLPOINTER BUG", "INCOMPLETE VALUES");
+        }
+//
+// finally {
+//            teamPosition.setText(String.valueOf(position));
+//            points.setText(String.valueOf(position));
+//            position = 3;
+//            playedGames.setText(String.valueOf(position));
+//            wins.setText(String.valueOf(position));
+//            draws.setText(String.valueOf(position));
+//            losses.setText(String.valueOf(position));
+//            goalDifference.setText(String.valueOf(position));
+//        }
+
+        return rowView;
+    }
+}
