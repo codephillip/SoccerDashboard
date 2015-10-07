@@ -42,7 +42,7 @@ public class TableListAdapter extends ArrayAdapter<String> {
 
         try{
             txtTitle.setText(itemname[position]);
-            imageView.setImageResource(imgId[position]);
+            imageView.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
             position++;
             teamPosition.setText(String.valueOf(position));
             points.setText(String.valueOf(position));
