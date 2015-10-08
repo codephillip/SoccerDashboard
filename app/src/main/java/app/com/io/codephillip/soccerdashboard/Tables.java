@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,7 +29,7 @@ public class Tables extends Fragment {
     private String[] tableArray;
     private ListView tableList;
     private FetchTableTask fetchTableTask;
-    ArrayAdapter <String>  adapter;
+//    ArrayAdapter <String>  adapter;
     private final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
     private final String imageUrls[] = {
             "52919.png","2605445.png","2601593.png","75027.png","2603039.png","2606733.png"
@@ -39,6 +38,8 @@ public class Tables extends Fragment {
     private Database database = null;
     private final ArrayList<String> al = new ArrayList<String>();
     private final String TAG = Tables.class.getSimpleName();
+    private TableListAdapter adapter;
+    private int n = 0;
 
     public void onPause() {
         super.onPause();
@@ -58,7 +59,7 @@ public class Tables extends Fragment {
                 "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
         };
         database = new Database(getActivity());
-        database.addLeagueTableData(new LeagueTable("4","6","4","4","6","4","7"));
+        database.addLeagueTableData(new LeagueTable("4", "6", "4", "4", "6", "4", "7"));
 
         //database returns a list of objects which will be stored in leagueTablelist
         final List<LeagueTable> leagueTableList = database.getLeagueTableData();
@@ -68,7 +69,11 @@ public class Tables extends Fragment {
             String logString = cn.getGoals() + "##" + cn.getPoints()+ "##" + cn.getTeamName();
             Log.d(TAG, logString);
             Toast.makeText(getActivity(), logString, Toast.LENGTH_SHORT).show();
+            tableArray[n] = logString;
+            n++;
         }
+        adapter = new TableListAdapter(getActivity(), tableArray, null);
+        tableList.setAdapter(adapter);
 
 
 //        ArrayAdapter <String>  adapter = new ArrayAdapter<String>(getActivity(),
@@ -77,8 +82,9 @@ public class Tables extends Fragment {
 //        tableList.setAdapter(adapter);
 
 
-        TableListAdapter adapter = new TableListAdapter(getActivity(), tableArray, null);
-        tableList.setAdapter(adapter);
+//        TableListAdapter adapter = new TableListAdapter(getActivity(), tableArray, null);
+
+//        tableList.setAdapter(adapter);
 
 		return view;
 	}
@@ -111,6 +117,8 @@ public class Tables extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             //super.onPostExecute(aVoid);
+
+
             tableList.setAdapter(adapter);
         }
     }
