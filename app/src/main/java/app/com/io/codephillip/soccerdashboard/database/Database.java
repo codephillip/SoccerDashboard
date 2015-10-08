@@ -1,5 +1,6 @@
 package app.com.io.codephillip.soccerdashboard.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,7 +11,7 @@ import android.util.Log;
  */
 public class Database extends SQLiteOpenHelper {
 
-    private static final String TAG = "SQL";
+    private static final String TAG = "###SQL###";
 
     private static final String DATABASE_NAME = "soccerdb";
     private static final int DATABASE_VERSION = 1;
@@ -51,7 +52,20 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    public void addLeagueTableData(){
+    public void addLeagueTableData(LeagueTable leagueTable){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        //put() takes the "name" to be used in storage and the "data" object
+        values.put(TAG_STANDING, leagueTable.getStandings());
+        values.put(TAG_POSITION, leagueTable.getStandings());
+        values.put(TAG_TEAM_NAME, leagueTable.getTeamName());
+        values.put(TAG_POINTS, leagueTable.getPoints());
+        values.put(TAG_GOALS, leagueTable.getGoals());
+        values.put(TAG_GOALS_AGAINST, leagueTable.getGoalsAgainst());
+        values.put(TAG_GOALS_DIFFERENCE, leagueTable.getGoalsDifference());
 
+        db.insert(LEAGUETABLE, null, values);
+        Log.d(TAG, "Inserting values into League table");
+        db.close();
     }
 }
