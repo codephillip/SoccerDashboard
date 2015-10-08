@@ -73,7 +73,7 @@ public class Database extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<LeagueTable> getTableData(){
+    public List<LeagueTable> getLeagueTableData(){
         List<LeagueTable> leagueTableList = new ArrayList<LeagueTable>();
         String query = "SELECT * FROM "+ LEAGUETABLE;
         //opening connection to the database for reading only
