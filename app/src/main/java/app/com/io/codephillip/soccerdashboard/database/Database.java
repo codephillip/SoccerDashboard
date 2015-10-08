@@ -22,6 +22,7 @@ public class Database extends SQLiteOpenHelper {
 
     //tables
     private static final  String LEAGUETABLE = "LeagueTable";
+    private static final  String FIXTURES_TABLE = "FixturesTable";
 
     //columns
     //leagueTable columns
@@ -33,7 +34,14 @@ public class Database extends SQLiteOpenHelper {
     private static final  String TAG_GOALS = "goals";
     private static final  String TAG_GOALS_AGAINST = "goalsAgainst";
     private static final  String TAG_GOALS_DIFFERENCE = "goalsDifference";
-
+    //fixtures columns
+    private static final String TAG_FIXTURES_TABLE_KEY_ID = "id";
+    private static final String TAG_DATE = "date";
+    private static final String TAG_STATUS = "status";
+    private static final String TAG_HOME_TEAM_NAME = "homeTeamName";
+    private static final String TAG_AWAY_TEAM_NAME = "awayTeamName";
+    private static final String TAG_GOALS_HOME_TEAM = "goalsHomeTeam";
+    private static final String TAG_GOALS_AWAY_TEAM = "goalsAwayTeam";
 
 
     public Database(Context context) {
@@ -46,7 +54,12 @@ public class Database extends SQLiteOpenHelper {
                 + " INTEGER PRIMARY KEY," + TAG_STANDING + " TINYTEXT," + TAG_POSITION + " TINYTEXT,"+
                 TAG_TEAM_NAME + " TINYTEXT,"+ TAG_POINTS + " TINYTEXT,"+ TAG_GOALS + " TINYTEXT,"+
                 TAG_GOALS_AGAINST + " TINYTEXT,"+ TAG_GOALS_DIFFERENCE + " TINYTEXT"+ ")";
+        String CREATE_FIXUTERES_TABLE = "CREATE TABLE " + FIXTURES_TABLE + "(" + TAG_FIXTURES_TABLE_KEY_ID
+                +" TINYTEXT," + TAG_DATE +" TINYTEXT,"+ TAG_STATUS +" TINYTEXT,"+
+                TAG_HOME_TEAM_NAME +" TINYTEXT,"+ TAG_AWAY_TEAM_NAME +" TINYTEXT,"+ TAG_GOALS_HOME_TEAM
+                +" TINYTEXT,"+ TAG_GOALS_AWAY_TEAM + ")";
         sqLiteDatabase.execSQL(CREATE_LEAGUE_TABLE);
+        sqLiteDatabase.execSQL(CREATE_FIXUTERES_TABLE);
         Log.d(TAG, "tables created successfully");
 
     }
@@ -67,7 +80,6 @@ public class Database extends SQLiteOpenHelper {
         values.put(TAG_GOALS, leagueTable.getGoals());
         values.put(TAG_GOALS_AGAINST, leagueTable.getGoalsAgainst());
         values.put(TAG_GOALS_DIFFERENCE, leagueTable.getGoalsDifference());
-
         db.insert(LEAGUETABLE, null, values);
         Log.d(TAG, "Inserting values into League table");
         db.close();
@@ -81,8 +93,8 @@ public class Database extends SQLiteOpenHelper {
         //cursor that point to the individual rows and fetches the data from the table
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         //looping through table fetching data then moves to the next cursor(row)
+        LeagueTable leagueTable = new LeagueTable();
         while (cursor.moveToNext()){
-            LeagueTable leagueTable = new LeagueTable();
             leagueTable.setId(Integer.parseInt(cursor.getString(0)));
             leagueTable.setStandings(cursor.getString(1));
             leagueTable.setPosition(cursor.getString(2));
@@ -95,5 +107,38 @@ public class Database extends SQLiteOpenHelper {
             leagueTableList.add(leagueTable);
         }
         return leagueTableList;
+    }
+
+    public void addFixtures(FixturesTable fixturesTable){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TAG_DATE, fixturesTable.getTagDate());
+        values.put(TAG_STATUS, fixturesTable.getTagStatus());
+        values.put(TAG_HOME_TEAM_NAME, fixturesTable.getTagHomeTeamName());
+        values.put(TAG_AWAY_TEAM_NAME, fixturesTable.getTagAwayTeamName());
+        values.put(TAG_GOALS_HOME_TEAM, fixturesTable.getTagGoalsHomeTeam());
+        values.put(TAG_GOALS_AWAY_TEAM, fixturesTable.getTagGoalsAwayTeam());
+        db.insert(FIXTURES_TABLE, null, values);
+        Log.d(TAG, "Inserting values into Fixutures table");
+        db.close();
+    }
+
+    public List<FixturesTable> getFixuturesTableData(){
+        ArrayList<FixturesTable> fixturesTableArrayList = new ArrayList<FixturesTable>();
+        FixturesTable fixturesTable = new FixturesTable();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM " + FIXTURES_TABLE;
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        while (cursor.moveToNext()){
+            fixturesTable.setTAG_FIXTURES_TABLE_KEY_ID(cursor.getString(0));
+            fixturesTable.setTAG_DATE(cursor.getString(1));
+            fixturesTable.setTAG_STATUS(cursor.getString(2));
+            fixturesTable.setTAG_HOME_TEAM_NAME(cursor.getString(3));
+            fixturesTable.setTAG_AWAY_TEAM_NAME(cursor.getString(4));
+            fixturesTable.setTAG_GOALS_HOME_TEAM(cursor.getString(5));
+            fixturesTable.setTAG_GOALS_AWAY_TEAM(cursor.getString(6));
+            fixturesTableArrayList.add(fixturesTable);
+        }
+        return fixturesTableArrayList;
     }
 }
