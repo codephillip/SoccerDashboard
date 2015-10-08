@@ -1,0 +1,34 @@
+ {
+         &quot;_links&quot;:{
+            &quot;self&quot;:{
+               &quot;href&quot;:&quot;http://api.football-data.org/alpha/fixtures/147075&quot;
+            },
+            &quot;soccerseason&quot;:{
+               &quot;href&quot;:&quot;http://api.football-data.org/alpha/soccerseasons/398&quot;
+            },
+            &quot;homeTeam&quot;:{
+               &quot;href&quot;:&quot;http://api.football-data.org/alpha/teams/66&quot;
+            },
+            &quot;awayTeam&quot;:{
+               &quot;href&quot;:&quot;http://api.football-data.org/alpha/teams/73&quot;
+            }
+         },
+         &quot;date&quot;:&quot;2015-08-08T11:45:00Z&quot;,
+         &quot;status&quot;:&quot;FINISHED&quot;,
+         &quot;matchday&quot;:1,
+         &quot;homeTeamName&quot;:&quot;Manchester United FC&quot;,
+         &quot;awayTeamName&quot;:&quot;Tottenham Hotspur FC&quot;,
+         &quot;result&quot;:{
+            &quot;goalsHomeTeam&quot;:1,
+            &quot;goalsAwayTeam&quot;:0
+         }
+      },
+
+      ###TODO###
+      +add search to the fixture tab
+      +add spinner in the actionbar
+      +add fixtures and predictions to the database and service
+      +make predictions algorithm
+
+
+
