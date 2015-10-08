@@ -19,9 +19,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import app.com.io.codephillip.soccerdashboard.database.Database;
+import app.com.io.codephillip.soccerdashboard.database.LeagueTable;
+
 public class Tables extends Fragment {
     private String[] tableArray;
     private ListView tableList;
+    private Database database;
     private FetchTableTask fetchTableTask;
     ArrayAdapter <String>  adapter;
     private final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
@@ -42,10 +46,15 @@ public class Tables extends Fragment {
                 "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
         };
 
+        database = new Database(getActivity());
+        database.addLeagueTableData(new LeagueTable("4","6","4","4","6","4","7"));
+
+
 //        ArrayAdapter <String>  adapter = new ArrayAdapter<String>(getActivity(),
 //                android.R.layout.simple_list_item_1, android.R.id.text1, tableArray
 //                );
 //        tableList.setAdapter(adapter);
+
 
         TableListAdapter adapter = new TableListAdapter(getActivity(), tableArray, null);
         tableList.setAdapter(adapter);

@@ -38,7 +38,7 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_LEAGUE_TABLE = "CREATE TABLE" + LEAGUETABLE + "(" + TAG_LEAGUE_TABLE_KEY_ID
+        String CREATE_LEAGUE_TABLE = "CREATE TABLE " + LEAGUETABLE + "(" + TAG_LEAGUE_TABLE_KEY_ID
                 + " INTEGER PRIMARY KEY," + TAG_STANDING + " TINYTEXT," + TAG_POSITION + " TINYTEXT,"+
                 TAG_TEAM_NAME + " TINYTEXT,"+ TAG_POINTS + " TINYTEXT,"+ TAG_GOALS + " TINYTEXT,"+
                 TAG_GOALS_AGAINST + " TINYTEXT,"+ TAG_GOALS_DIFFERENCE + " TINYTEXT"+ ")";
