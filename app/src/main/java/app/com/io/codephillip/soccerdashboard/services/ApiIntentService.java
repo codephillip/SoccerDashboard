@@ -13,12 +13,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import app.com.io.codephillip.soccerdashboard.database.Database;
+import app.com.io.codephillip.soccerdashboard.database.FixturesTable;
 import app.com.io.codephillip.soccerdashboard.database.LeagueTable;
 
 
 public class ApiIntentService extends IntentService {
-    private final String BarclaysPLUrl = "http://api.football-data.org/alpha/soccerseasons/398/leagueTable";
+    private final String BarclaysPLTableUrl = "http://api.football-data.org/alpha/soccerseasons/398/leagueTable";
+    private final String BarclaysPLFixturesUrl = "http://api.football-data.org/alpha/soccerseasons/398/fixtures";
     private Database database = null;
+    private final String TAG = ApiIntentService.class.getSimpleName();
 
     public ApiIntentService() {
         super("ApiIntentService");
@@ -28,18 +31,17 @@ public class ApiIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         try {
             int k;
-            for (k=0; k<1 ; k++){
+            for (k=0; k<2 ; k++){
                 if (k == 0){
-                    getTableDataJson(connectToServer(BarclaysPLUrl));
-                } else if (k == 1){
-                    //getBbnFromJson(connectToServer("http://192.168.56.1/lynda-php/apibbn.php"));
+                    getTableDataJson(connectToServer(BarclaysPLTableUrl));
+                } else if (k == 1) {
+                    getFixtureDataJson(connectToServer(BarclaysPLFixturesUrl));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("URL BUG", e.toString());
         }
-
     }
 
     private Void getTableDataJson(String jsonData) throws JSONException {
@@ -55,7 +57,7 @@ public class ApiIntentService extends IntentService {
         String teamName;
         String points;
         String goals;
-        String results;
+        String values;
         String goalsAgainst;
         String goalsDifference;
         String standings;
@@ -65,7 +67,6 @@ public class ApiIntentService extends IntentService {
 
         int i;
         int jsonLength = jsonArray.length();
-        //tableArray = new String[jsonLength];
 
         for (i=0; i<jsonLength; i++){
             JSONObject innerObject = jsonArray.getJSONObject(i);
@@ -78,20 +79,49 @@ public class ApiIntentService extends IntentService {
             goalsDifference = innerObject.getString(TAG_GOALS_DIFFERENCE);
             standings = innerObject.getString(TAG_STANDING);
 
-            results = teamName+" "+position+" "+points+" "+goals;
-            Log.d("JSONRESULT", results);
+            values = teamName+" "+position+" "+points+" "+goals;
+            Log.d("JSONRESULT", values);
 
             storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalsDifference, standings);
-
-            //tableArray[i] = results;
         }
-//        adapter = new ArrayAdapter<String>(getActivity(),
-//                android.R.layout.simple_list_item_1, android.R.id.text1, tableArray
-//        );
-//        adapter = new TableListAdapter(getActivity(), tableArray, imageUrls);
-
-//        tableList.setAdapter(adapter);
         return null;
+    }
+
+    private void getFixtureDataJson(String jsonData) throws JSONException{
+        final String TAG_DATE = "date";
+        final String TAG_STATUS = "status";
+        final String TAG_HOME_TEAM_NAME = "homeTeamName";
+        final String TAG_AWAY_TEAM_NAME = "awayTeamName";
+        final String TAG_GOALS_HOME_TEAM = "goalsHomeTeam";
+        final String TAG_GOALS_AWAY_TEAM = "goalsAwayTeam";
+        final String TAG_FIXTURES = "fixtures";
+        final String TAG_RESULT = "result";
+
+        String date;
+        String status;
+        String homeTeamName;
+        String awayTeamName;
+        String goalsHomeTeam;
+        String goalsAwayTeam;
+        String values;
+
+        JSONObject jsonObject = new JSONObject(jsonData);
+        JSONArray jsonArray = jsonObject.getJSONArray(TAG_FIXTURES);
+        int n, jsonLength = jsonArray.length();
+
+        for (n = 0; n < jsonLength; n++){
+            JSONObject innerObject = jsonArray.getJSONObject(n);
+            date = innerObject.getString(TAG_DATE);
+            status = innerObject.getString(TAG_STATUS);
+            homeTeamName = innerObject.getString(TAG_HOME_TEAM_NAME);
+            awayTeamName = innerObject.getString(TAG_AWAY_TEAM_NAME);
+            JSONObject resultObject = innerObject.getJSONObject(TAG_RESULT);
+            goalsHomeTeam = resultObject.getString(TAG_GOALS_HOME_TEAM);
+            goalsAwayTeam = resultObject.getString(TAG_AWAY_TEAM_NAME);
+
+            Log.d(TAG, date +"#"+ status +"#"+ homeTeamName +"#"+ awayTeamName +"#"+ goalsAwayTeam +"#"+ goalsAwayTeam);
+            storeInFixtureTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam);
+        }
     }
 
     private String connectToServer(String urlConnection) throws Exception{
@@ -107,5 +137,10 @@ public class ApiIntentService extends IntentService {
     private void storeInLeagueTable(String position, String teamName, String points, String goals, String standings, String goalsAgainst, String goalsDifference){
         database = new Database(this);
         database.addLeagueTableData(new LeagueTable(standings, position, teamName, points, goals, goalsAgainst, goalsDifference));
+    }
+
+    private void storeInFixtureTable(String date, String status, String homeTeamName, String awayTeamName, String goalsHomeTeam, String goalsAwayTeam){
+        database = new Database(this);
+        database.addFixtures(new FixturesTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam));
     }
 }
