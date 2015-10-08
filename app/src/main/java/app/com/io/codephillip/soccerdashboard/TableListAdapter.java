@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 /**
  * Created by codephillip on 9/26/15.
  */
@@ -16,9 +18,9 @@ public class TableListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
     private final String[] itemname;
-    private final Integer[] imgId;
+    private final String[] imgId;
 
-    public TableListAdapter(Activity context, String[] itemname, Integer[] imgId) {
+    public TableListAdapter(Activity context, String[] itemname, String[] imgId) {
         super(context, R.layout.mylist, itemname);
         this.context = context;
         this.itemname = itemname;
@@ -39,10 +41,17 @@ public class TableListAdapter extends ArrayAdapter<String> {
         TextView draws = (TextView) rowView.findViewById(R.id.draws);
         TextView losses = (TextView) rowView.findViewById(R.id.losses);
         TextView goalDifference = (TextView) rowView.findViewById(R.id.goaldifference);
+        final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
 
         try{
             txtTitle.setText(itemname[position]);
-            imageView.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+          //  imageView.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+            Picasso.with(context)
+                    .load(imageBaseUrl+imgId[position])
+                    //.resize(30,30)
+                    .placeholder(R.drawable.abc_btn_rating_star_on_mtrl_alpha)
+                    .error(R.drawable.abc_btn_rating_star_on_mtrl_alpha)
+                    .into(imageView);
             position++;
             teamPosition.setText(String.valueOf(position));
             points.setText(String.valueOf(position));
