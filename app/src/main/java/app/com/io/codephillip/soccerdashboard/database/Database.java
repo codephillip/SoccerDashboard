@@ -2,9 +2,13 @@ package app.com.io.codephillip.soccerdashboard.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by codephillip on 10/8/15.
@@ -67,5 +71,29 @@ public class Database extends SQLiteOpenHelper {
         db.insert(LEAGUETABLE, null, values);
         Log.d(TAG, "Inserting values into League table");
         db.close();
+    }
+
+    public List<LeagueTable> getTableData(){
+        List<LeagueTable> leagueTableList = new ArrayList<LeagueTable>();
+        String query = "SELECT * FROM "+ LEAGUETABLE;
+        //opening connection to the database for reading only
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        //cursor that point to the individual rows and fetches the data from the table
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        //looping through table fetching data then moves to the next cursor(row)
+        while (cursor.moveToNext()){
+            LeagueTable leagueTable = new LeagueTable();
+            leagueTable.setId(Integer.parseInt(cursor.getString(0)));
+            leagueTable.setStandings(cursor.getString(1));
+            leagueTable.setPosition(cursor.getString(2));
+            leagueTable.setTeamName(cursor.getString(3));
+            leagueTable.setPoints(cursor.getString(4));
+            leagueTable.setGoals(cursor.getString(5));
+            leagueTable.setGoalsAgainst(cursor.getString(6));
+            leagueTable.setGoalsDifference(cursor.getString(7));
+            //adding the object to the arrayList
+            leagueTableList.add(leagueTable);
+        }
+        return leagueTableList;
     }
 }

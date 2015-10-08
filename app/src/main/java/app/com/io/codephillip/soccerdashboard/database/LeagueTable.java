@@ -34,6 +34,10 @@ public class LeagueTable {
         this.goalsDifference = goalsDifference;
     }
 
+    public LeagueTable() {
+
+    }
+
     public int getId() {
         return id;
     }
