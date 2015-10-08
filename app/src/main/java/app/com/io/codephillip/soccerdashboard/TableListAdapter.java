@@ -9,8 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 /**
  * Created by codephillip on 9/26/15.
  */
@@ -45,13 +43,13 @@ public class TableListAdapter extends ArrayAdapter<String> {
 
         try{
             txtTitle.setText(itemname[position]);
-          //  imageView.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
-            Picasso.with(context)
-                    .load(imageBaseUrl+imgId[position])
-                    //.resize(30,30)
-                    .placeholder(R.drawable.abc_btn_rating_star_on_mtrl_alpha)
-                    .error(R.drawable.abc_btn_rating_star_on_mtrl_alpha)
-                    .into(imageView);
+            imageView.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
+//            Picasso.with(context)
+//                    .load(imageBaseUrl+imgId[position])
+//                    //.resize(30,30)
+//                    .placeholder(R.drawable.abc_btn_rating_star_on_mtrl_alpha)
+//                    .error(R.drawable.abc_btn_rating_star_on_mtrl_alpha)
+//                    .into(imageView);
             position++;
             teamPosition.setText(String.valueOf(position));
             points.setText(String.valueOf(position));

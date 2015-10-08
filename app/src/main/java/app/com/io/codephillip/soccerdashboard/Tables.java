@@ -35,20 +35,20 @@ public class Tables extends Fragment {
 		View view = inflater.inflate(R.layout.tables_layout, container, false);
 
         tableList = (ListView) view.findViewById(R.id.lv_tables);
-        fetchTableTask = new FetchTableTask();
-        fetchTableTask.execute("http://api.football-data.org/alpha/soccerseasons/398/leagueTable");
+//        fetchTableTask = new FetchTableTask();
+//        fetchTableTask.execute("http://api.football-data.org/alpha/soccerseasons/398/leagueTable");
 
-//        tableArray = new String[]{
-//                "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
-//        };
+        tableArray = new String[]{
+                "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
+        };
 
 //        ArrayAdapter <String>  adapter = new ArrayAdapter<String>(getActivity(),
 //                android.R.layout.simple_list_item_1, android.R.id.text1, tableArray
 //                );
 //        tableList.setAdapter(adapter);
 
-//        TableListAdapter adapter = new TableListAdapter(getActivity(), tableArray, imageUrls);
-//        tableList.setAdapter(adapter);
+        TableListAdapter adapter = new TableListAdapter(getActivity(), tableArray, null);
+        tableList.setAdapter(adapter);
 
 
 		return view;
