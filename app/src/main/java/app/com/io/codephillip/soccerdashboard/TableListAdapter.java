@@ -57,6 +57,7 @@ public class TableListAdapter extends ArrayAdapter<String> {
             playedGames.setText(String.valueOf(position));
             wins.setText(String.valueOf(position));
             draws.setText(String.valueOf(position));
+            position = 15;
             losses.setText(String.valueOf(position));
             goalDifference.setText(String.valueOf(position));
         }catch (ArrayIndexOutOfBoundsException e){
