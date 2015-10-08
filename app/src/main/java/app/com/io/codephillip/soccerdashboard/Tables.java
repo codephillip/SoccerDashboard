@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -19,21 +20,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import app.com.io.codephillip.soccerdashboard.database.Database;
 import app.com.io.codephillip.soccerdashboard.database.LeagueTable;
 
 public class Tables extends Fragment {
     private String[] tableArray;
     private ListView tableList;
-    private Database database;
     private FetchTableTask fetchTableTask;
     ArrayAdapter <String>  adapter;
     private final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
     private final String imageUrls[] = {
             "52919.png","2605445.png","2601593.png","75027.png","2603039.png","2606733.png"
     };
+//    private final Database database = new Database(getActivity());
+    private Database database = null;
+    private final ArrayList<String> al = new ArrayList<String>();
+    private final String TAG = Tables.class.getSimpleName();
 
-	@Override
+    public void onPause() {
+        super.onPause();
+        database.close();
+    }
+
+    @Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.tables_layout, container, false);
@@ -45,9 +57,18 @@ public class Tables extends Fragment {
         tableArray = new String[]{
                 "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
         };
-
         database = new Database(getActivity());
         database.addLeagueTableData(new LeagueTable("4","6","4","4","6","4","7"));
+
+        //database returns a list of objects which will be stored in leagueTablelist
+        final List<LeagueTable> leagueTableList = database.getLeagueTableData();
+        //fetch the objects from the list and store them in cn(LeagueTable object variable)
+        for(LeagueTable cn: leagueTableList){
+            //then call the getter methods to get the data
+            String logString = cn.getGoals() + "##" + cn.getPoints()+ "##" + cn.getTeamName();
+            Log.d(TAG, logString);
+            Toast.makeText(getActivity(), logString, Toast.LENGTH_SHORT).show();
+        }
 
 
 //        ArrayAdapter <String>  adapter = new ArrayAdapter<String>(getActivity(),
@@ -58,7 +79,6 @@ public class Tables extends Fragment {
 
         TableListAdapter adapter = new TableListAdapter(getActivity(), tableArray, null);
         tableList.setAdapter(adapter);
-
 
 		return view;
 	}
