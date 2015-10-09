@@ -37,7 +37,7 @@ public class Tables extends Fragment {
     private final ArrayList<String> al = new ArrayList<String>();
     private final String TAG = Tables.class.getSimpleName();
     private TableListAdapter adapter;
-    private ArrayList<String> tableArrayList = new ArrayList<String>();
+    private final ArrayList<String> tableArrayList = new ArrayList<String>();
 
     public void onPause() {
         super.onPause();

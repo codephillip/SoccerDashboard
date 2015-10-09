@@ -87,22 +87,36 @@ public class Database extends SQLiteOpenHelper {
         List<LeagueTable> leagueTableList = new ArrayList<LeagueTable>();
         String query = "SELECT * FROM "+ LEAGUETABLE;
         //opening connection to the database for reading only
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         //cursor that point to the individual rows and fetches the data from the table
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         //looping through table fetching data then moves to the next cursor(row)
         LeagueTable leagueTable = new LeagueTable();
-        while (cursor.moveToNext()){
-            leagueTable.setId(Integer.parseInt(cursor.getString(0)));
-            leagueTable.setPosition(cursor.getString(1));
-            leagueTable.setTeamName(cursor.getString(2));
-            leagueTable.setPoints(cursor.getString(3));
-            leagueTable.setGoals(cursor.getString(4));
-            leagueTable.setGoalsAgainst(cursor.getString(5));
-            leagueTable.setGoalsDifference(cursor.getString(6));
-            //adding the object to the arrayList
-            leagueTableList.add(leagueTable);
+
+        if (cursor.moveToFirst()) {
+            do {
+                leagueTable.setId(Integer.parseInt(cursor.getString(0)));
+                leagueTable.setPosition(cursor.getString(1));
+                leagueTable.setTeamName(cursor.getString(2));
+                leagueTable.setPoints(cursor.getString(3));
+                leagueTable.setGoals(cursor.getString(4));
+                leagueTable.setGoalsAgainst(cursor.getString(5));
+                leagueTable.setGoalsDifference(cursor.getString(6));
+                //adding the object to the arrayList
+                leagueTableList.add(leagueTable);
+            } while (cursor.moveToNext());
         }
+//        while (cursor.moveToNext()){
+//            leagueTable.setId(Integer.parseInt(cursor.getString(0)));
+//            leagueTable.setPosition(cursor.getString(1));
+//            leagueTable.setTeamName(cursor.getString(2));
+//            leagueTable.setPoints(cursor.getString(3));
+//            leagueTable.setGoals(cursor.getString(4));
+//            leagueTable.setGoalsAgainst(cursor.getString(5));
+//            leagueTable.setGoalsDifference(cursor.getString(6));
+//            //adding the object to the arrayList
+//            leagueTableList.add(leagueTable);
+//        }
         return leagueTableList;
     }
 
