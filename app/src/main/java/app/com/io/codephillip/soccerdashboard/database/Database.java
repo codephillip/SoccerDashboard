@@ -27,7 +27,6 @@ public class Database extends SQLiteOpenHelper {
     //columns
     //leagueTable columns
     private static final  String TAG_LEAGUE_TABLE_KEY_ID = "id";
-    private static final  String TAG_STANDING = "standing";
     private static final  String TAG_POSITION = "position";
     private static final  String TAG_TEAM_NAME = "teamName";
     private static final  String TAG_POINTS = "points";
@@ -51,7 +50,7 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_LEAGUE_TABLE = "CREATE TABLE " + LEAGUETABLE + "(" + TAG_LEAGUE_TABLE_KEY_ID
-                + " INTEGER PRIMARY KEY," + TAG_STANDING + " TINYTEXT," + TAG_POSITION + " TINYTEXT,"+
+                + " INTEGER PRIMARY KEY," + TAG_POSITION + " TINYTEXT,"+
                 TAG_TEAM_NAME + " TINYTEXT,"+ TAG_POINTS + " TINYTEXT,"+ TAG_GOALS + " TINYTEXT,"+
                 TAG_GOALS_AGAINST + " TINYTEXT,"+ TAG_GOALS_DIFFERENCE + " TINYTEXT"+ ")";
         String CREATE_FIXUTERES_TABLE = "CREATE TABLE " + FIXTURES_TABLE + "(" + TAG_FIXTURES_TABLE_KEY_ID
@@ -73,8 +72,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         //put() takes the "name" to be used in storage and the "data" object
-        values.put(TAG_STANDING, leagueTable.getStandings());
-        values.put(TAG_POSITION, leagueTable.getStandings());
+        values.put(TAG_POSITION, leagueTable.getPosition());
         values.put(TAG_TEAM_NAME, leagueTable.getTeamName());
         values.put(TAG_POINTS, leagueTable.getPoints());
         values.put(TAG_GOALS, leagueTable.getGoals());
@@ -96,13 +94,12 @@ public class Database extends SQLiteOpenHelper {
         LeagueTable leagueTable = new LeagueTable();
         while (cursor.moveToNext()){
             leagueTable.setId(Integer.parseInt(cursor.getString(0)));
-            leagueTable.setStandings(cursor.getString(1));
-            leagueTable.setPosition(cursor.getString(2));
-            leagueTable.setTeamName(cursor.getString(3));
-            leagueTable.setPoints(cursor.getString(4));
-            leagueTable.setGoals(cursor.getString(5));
-            leagueTable.setGoalsAgainst(cursor.getString(6));
-            leagueTable.setGoalsDifference(cursor.getString(7));
+            leagueTable.setPosition(cursor.getString(1));
+            leagueTable.setTeamName(cursor.getString(2));
+            leagueTable.setPoints(cursor.getString(3));
+            leagueTable.setGoals(cursor.getString(4));
+            leagueTable.setGoalsAgainst(cursor.getString(5));
+            leagueTable.setGoalsDifference(cursor.getString(6));
             //adding the object to the arrayList
             leagueTableList.add(leagueTable);
         }

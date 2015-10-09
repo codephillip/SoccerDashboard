@@ -58,8 +58,8 @@ public class Tables extends Fragment {
         tableArray = new String[]{
                 "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
         };
-        database = new Database(getActivity());
-        database.addLeagueTableData(new LeagueTable("4", "6", "4", "4", "6", "4", "7"));
+//        database = new Database(getActivity());
+//        database.addLeagueTableData(new LeagueTable("4", "6", "4", "4", "6", "4", "7"));
 
         //database returns a list of objects which will be stored in leagueTablelist
         final List<LeagueTable> leagueTableList = database.getLeagueTableData();

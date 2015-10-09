@@ -5,7 +5,6 @@ package app.com.io.codephillip.soccerdashboard.database;
  */
 public class LeagueTable {
     private int id;
-    private String standings;
     private String position;
     private String teamName;
     private String points;
@@ -13,9 +12,8 @@ public class LeagueTable {
     private String goalsAgainst;
     private String goalsDifference;
 
-    public LeagueTable(int id, String standings, String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference) {
+    public LeagueTable(int id, String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference) {
         this.id = id;
-        this.standings = standings;
         this.position = position;
         this.teamName = teamName;
         this.points = points;
@@ -24,8 +22,7 @@ public class LeagueTable {
         this.goalsDifference = goalsDifference;
     }
 
-    public LeagueTable(String standings, String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference) {
-        this.standings = standings;
+    public LeagueTable(String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference) {
         this.position = position;
         this.teamName = teamName;
         this.points = points;
@@ -44,14 +41,6 @@ public class LeagueTable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getStandings() {
-        return standings;
-    }
-
-    public void setStandings(String standings) {
-        this.standings = standings;
     }
 
     public String getPosition() {

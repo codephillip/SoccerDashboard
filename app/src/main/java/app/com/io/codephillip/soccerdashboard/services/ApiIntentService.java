@@ -51,7 +51,7 @@ public class ApiIntentService extends IntentService {
         final String TAG_POINTS = "points";
         final String TAG_GOALS = "goals";
         final String TAG_GOALS_AGAINST = "goalsAgainst";
-        final String TAG_GOALS_DIFFERENCE = "goalsDifference";
+        final String TAG_GOALS_DIFFERENCE = "goalDifference";
 
         String position;
         String teamName;
@@ -59,7 +59,7 @@ public class ApiIntentService extends IntentService {
         String goals;
         String values;
         String goalsAgainst;
-        String goalsDifference;
+        String goalDifference;
         String standings;
 
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -76,13 +76,12 @@ public class ApiIntentService extends IntentService {
             points = innerObject.getString(TAG_POINTS);
             goals = innerObject.getString(TAG_GOALS);
             goalsAgainst = innerObject.getString(TAG_GOALS_AGAINST);
-            goalsDifference = innerObject.getString(TAG_GOALS_DIFFERENCE);
-            standings = innerObject.getString(TAG_STANDING);
+            goalDifference = innerObject.getString(TAG_GOALS_DIFFERENCE);
 
             values = teamName+" "+position+" "+points+" "+goals;
             Log.d("JSONRESULT", values);
 
-            storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalsDifference, standings);
+            storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference);
         }
         return null;
     }
@@ -134,9 +133,9 @@ public class ApiIntentService extends IntentService {
         return jsonData;
     }
 
-    private void storeInLeagueTable(String position, String teamName, String points, String goals, String standings, String goalsAgainst, String goalsDifference){
+    private void storeInLeagueTable(String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference){
         database = new Database(this);
-        database.addLeagueTableData(new LeagueTable(standings, position, teamName, points, goals, goalsAgainst, goalsDifference));
+        database.addLeagueTableData(new LeagueTable( position, teamName, points, goals, goalsAgainst, goalsDifference));
     }
 
     private void storeInFixtureTable(String date, String status, String homeTeamName, String awayTeamName, String goalsHomeTeam, String goalsAwayTeam){

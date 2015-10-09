@@ -1,5 +1,6 @@
 package app.com.io.codephillip.soccerdashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -7,6 +8,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import app.com.io.codephillip.soccerdashboard.services.ApiIntentService;
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
     private TabsPagerAdapter pageAdapter;
@@ -50,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
+
+//        ApiIntentService apiIntentService = new ApiIntentService();
+//        apiIntentService.startS
+        Intent intent = new Intent(this, ApiIntentService.class);
+        startService(intent);
     }
 
     @Override
