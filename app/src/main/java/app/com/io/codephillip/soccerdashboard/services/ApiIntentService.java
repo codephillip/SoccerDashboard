@@ -29,6 +29,13 @@ public class ApiIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+//        try {
+//            database = new Database(this);
+//            database.deleteAllTables(new FixturesTable(0), new LeagueTable(0));
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
         try {
             int k;
             for (k=0; k<2 ; k++){

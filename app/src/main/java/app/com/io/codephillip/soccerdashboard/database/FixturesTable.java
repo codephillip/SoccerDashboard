@@ -34,6 +34,10 @@ public class FixturesTable {
     public FixturesTable() {
     }
 
+    public FixturesTable(int TAG_FIXTURES_TABLE_KEY_ID) {
+        this.TAG_FIXTURES_TABLE_KEY_ID = TAG_FIXTURES_TABLE_KEY_ID;
+    }
+
     public void setTAG_FIXTURES_TABLE_KEY_ID(int TAG_FIXTURES_TABLE_KEY_ID) {
         this.TAG_FIXTURES_TABLE_KEY_ID = TAG_FIXTURES_TABLE_KEY_ID;
     }

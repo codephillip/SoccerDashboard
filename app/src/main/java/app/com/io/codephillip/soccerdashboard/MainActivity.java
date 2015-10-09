@@ -128,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             //Toast.makeText(this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
             snackBar("Check Internet Connection");
         }
-
     }
 
     private void snackBar(String message){

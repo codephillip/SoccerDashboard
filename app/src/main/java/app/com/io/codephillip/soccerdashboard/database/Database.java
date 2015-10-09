@@ -152,4 +152,14 @@ public class Database extends SQLiteOpenHelper {
         }
         return fixturesTableArrayList;
     }
+
+    public void deleteAllTables(FixturesTable fixturesTable, LeagueTable leagueTable) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(FIXTURES_TABLE, TAG_FIXTURES_TABLE_KEY_ID + " >= ?",
+                new String[] { String.valueOf(fixturesTable.getTagFixturesTableKeyId()) });
+        db.delete(LEAGUETABLE, TAG_LEAGUE_TABLE_KEY_ID + " >= ?",
+                new String[] { String.valueOf(leagueTable.getId()) });
+        Log.d("SQL", "deleting content tables");
+        db.close();
+    }
 }

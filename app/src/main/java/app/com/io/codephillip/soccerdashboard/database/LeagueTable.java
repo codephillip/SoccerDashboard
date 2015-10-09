@@ -35,6 +35,10 @@ public class LeagueTable {
 
     }
 
+    public LeagueTable(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
