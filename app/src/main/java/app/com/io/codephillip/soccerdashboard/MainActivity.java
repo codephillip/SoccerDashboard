@@ -5,13 +5,14 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 import app.com.io.codephillip.soccerdashboard.services.ApiIntentService;
 
@@ -19,12 +20,14 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     private TabsPagerAdapter pageAdapter;
     private ViewPager pager;
     private ActionBar actionBar;
+    private View parentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         pager = (ViewPager) findViewById(R.id.pager);
+        parentLayout = findViewById(R.id.pager);
         actionBar = getSupportActionBar();
         startServerConnection();
         pageAdapter = new TabsPagerAdapter(getSupportFragmentManager());
@@ -122,8 +125,16 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             Intent intent = new Intent(this, ApiIntentService.class);
             startService(intent);
         }else {
-            Toast.makeText(this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+            snackBar("Check Internet Connection");
         }
 
+    }
+
+    private void snackBar(String message){
+        Snackbar snackbar = Snackbar.make(parentLayout, message, Snackbar.LENGTH_SHORT);
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(getResources().getColor(R.color.red));
+        snackbar.show();
     }
 }
