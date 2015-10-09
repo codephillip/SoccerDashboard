@@ -44,9 +44,9 @@ public class TableListAdapter extends ArrayAdapter<String> {
 
         try{
             txtTitle.setText(itemname[position]);
-            for(String k: itemname){
-                Log.d("###ARRAY RESULTS###", k);
-            }
+//            for(String k: itemname){
+//                Log.d("###ARRAY RESULTS###", k);
+//            }
             imageView.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
 //            Picasso.with(context)
 //                    .load(imageBaseUrl+imgId[position])

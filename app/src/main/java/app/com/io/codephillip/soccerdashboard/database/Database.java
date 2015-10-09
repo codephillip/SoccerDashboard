@@ -91,10 +91,10 @@ public class Database extends SQLiteOpenHelper {
         //cursor that point to the individual rows and fetches the data from the table
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         //looping through table fetching data then moves to the next cursor(row)
-        LeagueTable leagueTable = new LeagueTable();
 
         if (cursor.moveToFirst()) {
             do {
+                LeagueTable leagueTable = new LeagueTable();
                 leagueTable.setId(Integer.parseInt(cursor.getString(0)));
                 leagueTable.setPosition(cursor.getString(1));
                 leagueTable.setTeamName(cursor.getString(2));
@@ -136,11 +136,11 @@ public class Database extends SQLiteOpenHelper {
 
     public List<FixturesTable> getFixuturesTableData(){
         ArrayList<FixturesTable> fixturesTableArrayList = new ArrayList<FixturesTable>();
-        FixturesTable fixturesTable = new FixturesTable();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         String query = "SELECT * FROM " + FIXTURES_TABLE;
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         while (cursor.moveToNext()){
+            FixturesTable fixturesTable = new FixturesTable();
             fixturesTable.setTAG_FIXTURES_TABLE_KEY_ID(Integer.parseInt(cursor.getString(0)));
             fixturesTable.setTAG_DATE(cursor.getString(1));
             fixturesTable.setTAG_STATUS(cursor.getString(2));
