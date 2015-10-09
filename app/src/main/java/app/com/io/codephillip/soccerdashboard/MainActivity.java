@@ -1,6 +1,9 @@
 package app.com.io.codephillip.soccerdashboard;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -8,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import app.com.io.codephillip.soccerdashboard.services.ApiIntentService;
 
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         setContentView(R.layout.activity_main);
         pager = (ViewPager) findViewById(R.id.pager);
         actionBar = getSupportActionBar();
+        startServerConnection();
         pageAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pageAdapter);
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -56,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
 //        ApiIntentService apiIntentService = new ApiIntentService();
 //        apiIntentService.startS
-        Intent intent = new Intent(this, ApiIntentService.class);
-        startService(intent);
+//        Intent intent = new Intent(this, ApiIntentService.class);
+//        startService(intent);
     }
 
     @Override
@@ -93,6 +98,32 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     @Override
     public void onTabUnselected(ActionBar.Tab arg0, FragmentTransaction arg1) {
         // TODO Auto-generated method stub
+
+    }
+
+    private boolean isConnectedToInternet(){
+        ConnectivityManager connectivity = (ConnectivityManager) this.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                        return true;
+                    }
+        }
+        return false;
+    }
+
+    public void startServerConnection(){
+        boolean connectionCheck = isConnectedToInternet();
+        if (connectionCheck){
+            Intent intent = new Intent(this, ApiIntentService.class);
+            startService(intent);
+        }else {
+            Toast.makeText(this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }
