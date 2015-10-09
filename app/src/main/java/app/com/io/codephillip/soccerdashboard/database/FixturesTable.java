@@ -4,7 +4,7 @@ package app.com.io.codephillip.soccerdashboard.database;
  * Created by codephillip on 10/9/15.
  */
 public class FixturesTable {
-    private  String TAG_FIXTURES_TABLE_KEY_ID;
+    private  int TAG_FIXTURES_TABLE_KEY_ID;
     private  String TAG_DATE;
     private  String TAG_STATUS;
     private  String TAG_HOME_TEAM_NAME;
@@ -12,7 +12,7 @@ public class FixturesTable {
     private  String TAG_GOALS_HOME_TEAM;
     private  String TAG_GOALS_AWAY_TEAM;
 
-    public FixturesTable(String TAG_FIXTURES_TABLE_KEY_ID, String TAG_DATE, String TAG_STATUS, String TAG_HOME_TEAM_NAME, String TAG_AWAY_TEAM_NAME, String TAG_GOALS_HOME_TEAM, String TAG_GOALS_AWAY_TEAM) {
+    public FixturesTable(int TAG_FIXTURES_TABLE_KEY_ID, String TAG_DATE, String TAG_STATUS, String TAG_HOME_TEAM_NAME, String TAG_AWAY_TEAM_NAME, String TAG_GOALS_HOME_TEAM, String TAG_GOALS_AWAY_TEAM) {
         this.TAG_FIXTURES_TABLE_KEY_ID = TAG_FIXTURES_TABLE_KEY_ID;
         this.TAG_DATE = TAG_DATE;
         this.TAG_STATUS = TAG_STATUS;
@@ -34,7 +34,7 @@ public class FixturesTable {
     public FixturesTable() {
     }
 
-    public void setTAG_FIXTURES_TABLE_KEY_ID(String TAG_FIXTURES_TABLE_KEY_ID) {
+    public void setTAG_FIXTURES_TABLE_KEY_ID(int TAG_FIXTURES_TABLE_KEY_ID) {
         this.TAG_FIXTURES_TABLE_KEY_ID = TAG_FIXTURES_TABLE_KEY_ID;
     }
 
@@ -62,7 +62,7 @@ public class FixturesTable {
         this.TAG_GOALS_AWAY_TEAM = TAG_GOALS_AWAY_TEAM;
     }
 
-    public String getTagFixturesTableKeyId() {
+    public int getTagFixturesTableKeyId() {
         return TAG_FIXTURES_TABLE_KEY_ID;
     }
 

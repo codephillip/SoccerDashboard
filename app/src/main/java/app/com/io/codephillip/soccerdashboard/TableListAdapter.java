@@ -25,6 +25,7 @@ public class TableListAdapter extends ArrayAdapter<String> {
         this.imgId = imgId;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();

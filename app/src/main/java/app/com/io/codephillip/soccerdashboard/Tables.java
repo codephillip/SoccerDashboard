@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -29,7 +28,6 @@ public class Tables extends Fragment {
     private String[] tableArray;
     private ListView tableList;
     private FetchTableTask fetchTableTask;
-//    ArrayAdapter <String>  adapter;
     private final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
     private final String imageUrls[] = {
             "52919.png","2605445.png","2601593.png","75027.png","2603039.png","2606733.png"
@@ -39,7 +37,7 @@ public class Tables extends Fragment {
     private final ArrayList<String> al = new ArrayList<String>();
     private final String TAG = Tables.class.getSimpleName();
     private TableListAdapter adapter;
-    private int n = 0;
+    private ArrayList<String> tableArrayList = new ArrayList<String>();
 
     public void onPause() {
         super.onPause();
@@ -55,23 +53,30 @@ public class Tables extends Fragment {
 //        fetchTableTask = new FetchTableTask();
 //        fetchTableTask.execute("http://api.football-data.org/alpha/soccerseasons/398/leagueTable");
 
-        tableArray = new String[]{
-                "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
-        };
-//        database = new Database(getActivity());
+//        tableArray = new String[]{
+//                "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
+//        };
+        database = new Database(getActivity());
 //        database.addLeagueTableData(new LeagueTable("4", "6", "4", "4", "6", "4", "7"));
 
         //database returns a list of objects which will be stored in leagueTablelist
         final List<LeagueTable> leagueTableList = database.getLeagueTableData();
-        //fetch the objects from the list and store them in cn(LeagueTable object variable)
-        for(LeagueTable cn: leagueTableList){
-            //then call the getter methods to get the data
-            String logString = cn.getGoals() + "##" + cn.getPoints()+ "##" + cn.getTeamName();
-            Log.d(TAG, logString);
-            Toast.makeText(getActivity(), logString, Toast.LENGTH_SHORT).show();
-            tableArray[n] = logString;
-            n++;
+        try{
+            //fetch the objects from the list and store them in cn(LeagueTable object variable)
+            for(LeagueTable cn: leagueTableList){
+                //then call the getter methods to get the data
+                String logString = cn.getGoals() + "##" + cn.getPoints()+ "##" + cn.getTeamName()+ cn.getId();
+//                Log.d(TAG, logString);cn.
+//                Toast.makeText(getActivity(), logString, Toast.LENGTH_SHORT).show();
+                tableArrayList.add(cn.getTeamName()+" "+cn.getId());
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+            e.printStackTrace();
         }
+
+        tableArray = new String[tableArrayList.size()];
+        tableArray = tableArrayList.toArray(tableArray);
+
         adapter = new TableListAdapter(getActivity(), tableArray, null);
         tableList.setAdapter(adapter);
 

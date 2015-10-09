@@ -114,9 +114,10 @@ public class ApiIntentService extends IntentService {
             status = innerObject.getString(TAG_STATUS);
             homeTeamName = innerObject.getString(TAG_HOME_TEAM_NAME);
             awayTeamName = innerObject.getString(TAG_AWAY_TEAM_NAME);
+
             JSONObject resultObject = innerObject.getJSONObject(TAG_RESULT);
             goalsHomeTeam = resultObject.getString(TAG_GOALS_HOME_TEAM);
-            goalsAwayTeam = resultObject.getString(TAG_AWAY_TEAM_NAME);
+            goalsAwayTeam = resultObject.getString(TAG_GOALS_AWAY_TEAM);
 
             Log.d(TAG, date +"#"+ status +"#"+ homeTeamName +"#"+ awayTeamName +"#"+ goalsAwayTeam +"#"+ goalsAwayTeam);
             storeInFixtureTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam);

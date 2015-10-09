@@ -54,7 +54,7 @@ public class Database extends SQLiteOpenHelper {
                 TAG_TEAM_NAME + " TINYTEXT,"+ TAG_POINTS + " TINYTEXT,"+ TAG_GOALS + " TINYTEXT,"+
                 TAG_GOALS_AGAINST + " TINYTEXT,"+ TAG_GOALS_DIFFERENCE + " TINYTEXT"+ ")";
         String CREATE_FIXUTERES_TABLE = "CREATE TABLE " + FIXTURES_TABLE + "(" + TAG_FIXTURES_TABLE_KEY_ID
-                +" TINYTEXT," + TAG_DATE +" TINYTEXT,"+ TAG_STATUS +" TINYTEXT,"+
+                +" INTEGER PRIMARY KEY," + TAG_DATE +" TINYTEXT,"+ TAG_STATUS +" TINYTEXT,"+
                 TAG_HOME_TEAM_NAME +" TINYTEXT,"+ TAG_AWAY_TEAM_NAME +" TINYTEXT,"+ TAG_GOALS_HOME_TEAM
                 +" TINYTEXT,"+ TAG_GOALS_AWAY_TEAM + ")";
         sqLiteDatabase.execSQL(CREATE_LEAGUE_TABLE);
@@ -127,7 +127,7 @@ public class Database extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + FIXTURES_TABLE;
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         while (cursor.moveToNext()){
-            fixturesTable.setTAG_FIXTURES_TABLE_KEY_ID(cursor.getString(0));
+            fixturesTable.setTAG_FIXTURES_TABLE_KEY_ID(Integer.parseInt(cursor.getString(0)));
             fixturesTable.setTAG_DATE(cursor.getString(1));
             fixturesTable.setTAG_STATUS(cursor.getString(2));
             fixturesTable.setTAG_HOME_TEAM_NAME(cursor.getString(3));
