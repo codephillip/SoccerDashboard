@@ -56,49 +56,22 @@ public class Tables extends Fragment {
             for(LeagueTable cn: leagueTableList){
                 //then call the getter methods to get the data
                 String logString = cn.getGoals() + "##" + cn.getPoints()+ "##" + cn.getTeamName()+ cn.getId();
-//                Log.d(TAG, logString);cn.
-//                Toast.makeText(getActivity(), logString, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, logString);
                 tableArrayList.add(cn.getTeamName()+" "+cn.getId());
             }
         }catch (ArrayIndexOutOfBoundsException e){
             e.printStackTrace();
         }
 
-//        final List<FixturesTable> fixturesTableList = database.getFixuturesTableData();
-//        try{
-//            //fetch the objects from the list and store them in cn(LeagueTable object variable)
-//            for(FixturesTable cn: fixturesTableList){
-//                //then call the getter methods to get the data
-//                String logString = cn.getTagHomeTeamName() +"#"+ cn.getTagFixturesTableKeyId();
-////                Log.d(TAG, logString);cn.
-////                Toast.makeText(getActivity(), logString, Toast.LENGTH_SHORT).show();
-//                tableArrayList.add(cn.getTagHomeTeamName());
-//            }
-//        }catch (ArrayIndexOutOfBoundsException e){
-//            e.printStackTrace();
-//        }
-
         for (String k: tableArrayList){
             Log.d("ARRAYLISTCONTENT", k);
         }
-
 
         tableArray = new String[tableArrayList.size()];
         tableArray = tableArrayList.toArray(tableArray);
 
         adapter = new TableListAdapter(getActivity(), tableArray, null);
         tableList.setAdapter(adapter);
-
-
-//        ArrayAdapter <String>  adapter = new ArrayAdapter<String>(getActivity(),
-//                android.R.layout.simple_list_item_1, android.R.id.text1, tableArray
-//                );
-//        tableList.setAdapter(adapter);
-
-
-//        TableListAdapter adapter = new TableListAdapter(getActivity(), tableArray, null);
-
-//        tableList.setAdapter(adapter);
 
 		return view;
 	}

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.com.io.codephillip.soccerdashboard.database.Database;
@@ -23,8 +24,11 @@ public class Fixtures extends Fragment {
     private String[] date;
     private String[] homeTeamName;
     private Database database = null;
-    int n = 0;
     private String TAG = Fixtures.class.getSimpleName();
+    private final ArrayList<String> homeTeamNameList = new ArrayList<String>();
+    private final ArrayList<String> awayTeamNameList = new ArrayList<String>();
+    private final ArrayList<String> scoreList = new ArrayList<String>();
+    private final ArrayList<String> dateList = new ArrayList<String>();
 
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,15 +36,9 @@ public class Fixtures extends Fragment {
 
         fixtureList = (ListView) view.findViewById(R.id.lv_fixtures);
 
-//        fixtureArray = new String[]{
-//                "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
-//        };
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
-//                android.R.id.text1, fixtureArray
-//                );
         fetchFromDatabase();
         FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, awayTeamName, score, null);
+//        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, null, null, null);
         fixtureList.setAdapter(adapter);
 		return view;
 	}
@@ -52,32 +50,44 @@ public class Fixtures extends Fragment {
 //        //database returns a list of objects which will be stored in leagueTablelist
         final List<FixturesTable> fixturesTableList = database.getFixuturesTableData();
 //        homeTeamName = awayTeamName = score new String[fixturesTableList.size()];
-        homeTeamName = new String[fixturesTableList.size()+1];
-        awayTeamName = new String[fixturesTableList.size()+1];
-        score = new String[fixturesTableList.size()+1];
+
         try{
             //fetch the objects from the list and store them in cn(LeagueTable object variable)
             for(FixturesTable cn: fixturesTableList){
                 //then call the getter methods to get the data
                 String logString = cn.getTagHomeTeamName() + "##" + cn.getTagAwayTeamName()+ "##" + cn.getTagGoalsAwayTeam()+ cn.getTagGoalsHomeTeam();
                 Log.d(TAG + " #########", logString);
-//                Toast.makeText(getActivity(), logString, Toast.LENGTH_SHORT).show();
-                //tableArrayList.add(cn.getTeamName()+" "+cn.getId());
+                homeTeamNameList.add(cn.getTagHomeTeamName());
+                awayTeamNameList.add(cn.getTagAwayTeamName());
+                scoreList.add(cn.getTagGoalsHomeTeam() + " - " + cn.getTagGoalsAwayTeam());
+                dateList.add(cn.getTagDate());
 
-                homeTeamName[n] = cn.getTagHomeTeamName();
-                awayTeamName[n] = cn.getTagAwayTeamName();
-                score[n] = cn.getTagGoalsHomeTeam() + " - " + cn.getTagGoalsAwayTeam();
-                //date[n] = cn.getTagDate();
-                n++;
+//                homeTeamName[n] = cn.getTagHomeTeamName();
+//                awayTeamName[n] = cn.getTagAwayTeamName();
             }
         }catch (ArrayIndexOutOfBoundsException e){
             e.printStackTrace();
         }
+        //converting ArrayList to Array
+        homeTeamName = new String[homeTeamNameList.size()];
+        awayTeamName = new String[homeTeamNameList.size()];
+        score = new String[homeTeamNameList.size()];
+        date = new String[homeTeamNameList.size()];
+        homeTeamName = homeTeamNameList.toArray(homeTeamName);
+        awayTeamName = awayTeamNameList.toArray(awayTeamName);
+        score = scoreList.toArray(score);
+        date = dateList.toArray(date);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        database.close();
+        //database.close();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchFromDatabase();
     }
 }

@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
-import app.com.io.codephillip.soccerdashboard.database.Database;
-
 /**
  * Created by codephillip on 10/10/15.
  */
@@ -28,9 +24,6 @@ public class FixturesListAdapter extends ArrayAdapter<String> {
     private String[] imgId;
     private final Activity context;
     final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
-    private Database database = null;
-    private final ArrayList<String> fixturesArrayList = new ArrayList<String>();
-    int n = 0;
     String TAG = FixturesListAdapter.class.getSimpleName();
 
 
