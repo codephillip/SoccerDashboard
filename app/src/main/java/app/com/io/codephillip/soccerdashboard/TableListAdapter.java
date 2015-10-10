@@ -165,8 +165,8 @@ public class TableListAdapter extends ArrayAdapter<String> {
         Picasso.with(context)
                 .load(url)
                         //.resize(30,30)
-                .placeholder(R.drawable.com_facebook_button_icon)
-                .error(R.drawable.com_facebook_tooltip_black_xout)
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
                 .into(imageView);
     }
 }
