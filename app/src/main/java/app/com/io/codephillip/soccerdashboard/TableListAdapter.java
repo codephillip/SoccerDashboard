@@ -19,7 +19,7 @@ public class TableListAdapter extends ArrayAdapter<String> {
     private final String[] imgId;
 
     public TableListAdapter(Activity context, String[] itemname, String[] imgId) {
-        super(context, R.layout.mylist, itemname);
+        super(context, R.layout.league_table_row, itemname);
         this.context = context;
         this.itemname = itemname;
         this.imgId = imgId;
@@ -29,7 +29,7 @@ public class TableListAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.mylist, null, true);
+        View rowView = inflater.inflate(R.layout.league_table_row, null, true);
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.teamname);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);

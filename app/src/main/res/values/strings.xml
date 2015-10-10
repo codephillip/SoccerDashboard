@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Soccer Dashboard</string>
 
-    <string name="hello_world">Hello world! thid is isi soiatdsn</string>
+    <string name="hello_world">Chelsea</string>
+    <string name="hello_world2">Manchester</string>
     <string name="action_settings">Settings</string>
+    <string name="time">16:00</string>
 </resources>
