@@ -19,8 +19,30 @@ public class Tables extends Fragment {
     private String[] tableArray;
     private ListView tableList;
     //private FetchTableTask fetchTableTask;
+//    private final String imageUrls[] = {
+//            "52919.png","2605445.png","2601593.png","75027.png","2603039.png","2606733.png"
+//    };
     private final String imageUrls[] = {
-            "52919.png","2605445.png","2601593.png","75027.png","2603039.png","2606733.png"
+            "a/arsenal",
+            "a/aston-villa",
+            "b/bournemouth",
+            "c/chelsea",
+            "c/crystal-palace",
+            "e/everton",
+            "l/leicester",
+            "l/liverpool",
+            "m/man-city",
+            "m/man-utd",
+            "n/newcastle",
+            "n/norwich",
+            "s/southampton",
+            "s/stoke",
+            "s/sunderland",
+            "s/swansea",
+            "s/spurs",
+            "w/watford",
+            "w/west-brom",
+            "w/west-ham",
     };
 //    private final Database database = new Database(getActivity());
     private Database database = null;

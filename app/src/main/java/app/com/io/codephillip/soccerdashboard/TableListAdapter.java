@@ -43,81 +43,91 @@ public class TableListAdapter extends ArrayAdapter<String> {
         TextView draws = (TextView) rowView.findViewById(R.id.draws);
         TextView losses = (TextView) rowView.findViewById(R.id.losses);
         TextView goalDifference = (TextView) rowView.findViewById(R.id.goaldifference);
-        final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
+        final String imageBaseUrl = "http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/";
+        final String endUrl = "/logo.png/_jcr_content/renditions/cq5dam.thumbnail.55.55.png";
 
         try{
             teamName.setText(itemname[position]);
 
-//            switch (itemname[position]){
-//                case "Manchester City FC":
-//                    Log.d(TAG+"###", "Picasso loading image");
-//                    //picassoLoader(imageBaseUrl+imgId[0], imageView);
-//                    Picasso.with(context)
-//                            .load(imageBaseUrl+imgId[0])
-//                                    //.resize(30,30)
-//                            .placeholder(R.drawable.com_facebook_button_icon)
-//                            .error(R.drawable.com_facebook_tooltip_black_xout)
-//                            .into(imageView);
-//                    break;
-//                case "Arsenal FC":
-//                    picassoLoader(imageBaseUrl+imgId[1], imageView);
-//                    break;
-//                case "Manchester United FC":
-//                    picassoLoader(imageBaseUrl+imgId[2], imageView);
-//                    break;
-//                case "Crystal Palace FC":
-//                    picassoLoader(imageBaseUrl+imgId[3], imageView);
-//                    break;
-//                case "Leicester City FC":
-//                    picassoLoader(imageBaseUrl+imgId[4], imageView);
-//                    break;
-//                case "West Ham United FC":
-//                break;
-//                case "Everton FC":
-//                break;
-//                case "Tottenham Hotspur FC":
-//                break;
-//                case "Southampton FC":
-//                break;
-//                case "Liverpool FC":
-//                break;
-//                case "Swansea City FC":
-//                break;
-//                case "Watford FC":
-//                break;
-//                case "Norwich City FC":
-//                break;
-//                case "Stoke City FC":
-//                break;
-//                case "AFC Bournemouth":
-//                break;
-//                case "Chelsea FC":
-//                break;
-//                case "West Bromwich Albion FC":
-//                break;
-//                case "Aston Villa FC":
-//                break;
-//                case "Sunderland AFC":
-//                break;
-//                case "Newcastle United FC":
-//                break;
-//                default:
-//                    Log.d(TAG+"####", "Flag not found");
-//            }
+            switch (itemname[position]){
+                case "Manchester City FC":
+                    picassoLoader(imageBaseUrl+imgId[8]+endUrl, imageView);
+                    Log.d(TAG+"###", "Picasso loading image");
+                    break;
+                case "Arsenal FC":
+                    picassoLoader(imageBaseUrl+imgId[0]+endUrl, imageView);
+                    break;
+                case "Manchester United FC":
+                    picassoLoader(imageBaseUrl+imgId[9]+endUrl, imageView);
+                    break;
+                case "Crystal Palace FC":
+                    picassoLoader(imageBaseUrl+imgId[4]+endUrl, imageView);
+                    break;
+                case "Leicester City FC":
+                    picassoLoader(imageBaseUrl+imgId[6]+endUrl, imageView);
+                    break;
+                case "West Ham United FC":
+                    picassoLoader(imageBaseUrl+imgId[19]+endUrl, imageView);
+                    break;
+                case "Everton FC":
+                    picassoLoader(imageBaseUrl+imgId[5]+endUrl, imageView);
+                    break;
+                case "Tottenham Hotspur FC":
+                    picassoLoader(imageBaseUrl+imgId[16]+endUrl, imageView);
+                    break;
+                case "Southampton FC":
+                    picassoLoader(imageBaseUrl+imgId[12]+endUrl, imageView);
+                    break;
+                case "Liverpool FC":
+                    picassoLoader(imageBaseUrl+imgId[7]+endUrl, imageView);
+                    break;
+                case "Swansea City FC":
+                    picassoLoader(imageBaseUrl+imgId[15]+endUrl, imageView);
+                    break;
+                case "Watford FC":
+                    picassoLoader(imageBaseUrl+imgId[17]+endUrl, imageView);
+                    break;
+                case "Norwich City FC":
+                    picassoLoader(imageBaseUrl+imgId[11]+endUrl, imageView);
+                    break;
+                case "Stoke City FC":
+                    picassoLoader(imageBaseUrl+imgId[13]+endUrl, imageView);
+                    break;
+                case "AFC Bournemouth":
+                    picassoLoader(imageBaseUrl+imgId[2]+endUrl, imageView);
+                    break;
+                case "Chelsea FC":
+                    picassoLoader(imageBaseUrl+imgId[3]+endUrl, imageView);
+                    break;
+                case "West Bromwich Albion FC":
+                    picassoLoader(imageBaseUrl+imgId[18]+endUrl, imageView);
+                    break;
+                case "Aston Villa FC":
+                    picassoLoader(imageBaseUrl+imgId[1]+endUrl, imageView);
+                    break;
+                case "Sunderland AFC":
+                    picassoLoader(imageBaseUrl+imgId[14]+endUrl, imageView);
+                    break;
+                case "Newcastle United FC":
+                    picassoLoader(imageBaseUrl+imgId[10]+endUrl, imageView);
+                    break;
+                default:
+                    Log.d(TAG+"####", "Flag not found");
+            }
 //            for(String k: itemname){
 //                Log.d("###ARRAY RESULTS###", k);
 //            }
             //imageView.setImageResource(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
-            if (itemname[position].equals("Manchester City FC")) {
-                Log.d("string$$$###", "comparison true");
-                Picasso.with(context)
-                        .load(imageBaseUrl+imgId[0])
-                                //.resize(30,30)
-                        .placeholder(R.drawable.com_facebook_button_icon)
-                        .error(R.drawable.com_facebook_tooltip_black_xout)
-                        .into(imageView);
-                Log.d("picasso$$$###", "picasso endeed");
-            }
+//            if (itemname[position].equals("Manchester City FC")) {
+//                Log.d("string$$$###", "comparison true");
+//                Picasso.with(context)
+//                        .load(imageBaseUrl+imgId[0])
+//                                //.resize(30,30)
+//                        .placeholder(R.drawable.com_facebook_button_icon)
+//                        .error(R.drawable.com_facebook_tooltip_black_xout)
+//                        .into(imageView);
+//                Log.d("picasso$$$###", "picasso endeed");
+//            }
 
             position++;
             teamPosition.setText(String.valueOf(position));
@@ -155,8 +165,8 @@ public class TableListAdapter extends ArrayAdapter<String> {
         Picasso.with(context)
                 .load(url)
                         //.resize(30,30)
-//                .placeholder(R.drawable.abc_btn_rating_star_on_mtrl_alpha)
-//                .error(R.drawable.abc_btn_rating_star_on_mtrl_alpha)
+                .placeholder(R.drawable.com_facebook_button_icon)
+                .error(R.drawable.com_facebook_tooltip_black_xout)
                 .into(imageView);
     }
 }
