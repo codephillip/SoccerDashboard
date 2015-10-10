@@ -29,6 +29,28 @@ public class Fixtures extends Fragment {
     private final ArrayList<String> awayTeamNameList = new ArrayList<String>();
     private final ArrayList<String> scoreList = new ArrayList<String>();
     private final ArrayList<String> dateList = new ArrayList<String>();
+    private final String imageUrls[] = {
+            "a/arsenal",
+            "a/aston-villa",
+            "b/bournemouth",
+            "c/chelsea",
+            "c/crystal-palace",
+            "e/everton",
+            "l/leicester",
+            "l/liverpool",
+            "m/man-city",
+            "m/man-utd",
+            "n/newcastle",
+            "n/norwich",
+            "s/southampton",
+            "s/stoke",
+            "s/sunderland",
+            "s/swansea",
+            "s/spurs",
+            "w/watford",
+            "w/west-brom",
+            "w/west-ham",
+    };
 
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,7 +60,7 @@ public class Fixtures extends Fragment {
 
         fetchFromDatabase();
 //        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamNameList, awayTeamNameList, scoreList, null);
-        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, awayTeamName, score, null);
+        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, awayTeamName, score, imageUrls);
 //        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, null, null, null);
         fixtureList.setAdapter(adapter);
 		return view;

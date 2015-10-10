@@ -6,14 +6,6 @@
 
     <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_marginRight="100dp"
-                  android:layout_alignParentRight="true" android:id="@+id/linearLayout2">
-
-
-    </LinearLayout>
-
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
                   android:id="@+id/centerLayout"
                   android:layout_alignParentTop="true"
                   android:layout_centerHorizontal="true">
@@ -38,6 +30,7 @@
               android:layout_toStartOf="@+id/homeTeamImage"/>
     <ImageView android:layout_width="wrap_content"
                android:layout_height="wrap_content"
+               android:layout_marginTop="7dp"
                android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
                android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/centerLayout"
                android:layout_toStartOf="@+id/centerLayout" android:layout_marginRight="7dp"
@@ -60,6 +53,7 @@
     <ImageView android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:id="@+id/awayImageTeam"
+               android:layout_marginTop="7dp"
                android:layout_marginLeft="216dp"
                android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"/>
 
