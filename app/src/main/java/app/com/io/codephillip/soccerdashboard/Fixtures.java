@@ -37,6 +37,7 @@ public class Fixtures extends Fragment {
         fixtureList = (ListView) view.findViewById(R.id.lv_fixtures);
 
         fetchFromDatabase();
+//        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamNameList, awayTeamNameList, scoreList, null);
         FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, awayTeamName, score, null);
 //        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, null, null, null);
         fixtureList.setAdapter(adapter);
@@ -82,12 +83,12 @@ public class Fixtures extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        //database.close();
+        database.close();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        fetchFromDatabase();
+        //fetchFromDatabase();
     }
 }

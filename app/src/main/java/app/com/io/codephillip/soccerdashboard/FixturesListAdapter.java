@@ -37,6 +37,20 @@ public class FixturesListAdapter extends ArrayAdapter<String> {
         this.score = score;
     }
 
+//    public FixturesListAdapter(Activity context, ArrayList<String> date, ArrayList<String> homeTeamName, ArrayList<String> awayTeamName, ArrayList<String> score, String imgId[]) {
+//        super(context, R.layout.fixtures_table_row, homeTeamName);
+//        this.context = context;
+//        this.date = new String[date.size()];
+//        this.date = date.toArray(this.date);
+//        this.homeTeamName = new String[date.size()];
+//        this.homeTeamName = homeTeamName.toArray(this.homeTeamName);
+//        this.awayTeamName = new String[date.size()];
+//        this.awayTeamName = awayTeamName.toArray(this.awayTeamName);
+//        this.imgId = imgId;
+//        this.score = new String[date.size()];
+//        this.score = score.toArray(this.score);
+//    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
