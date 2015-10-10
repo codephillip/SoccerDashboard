@@ -1,7 +1,6 @@
 package app.com.io.codephillip.soccerdashboard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -13,8 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import app.com.io.codephillip.soccerdashboard.services.ApiIntentService;
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
     private TabsPagerAdapter pageAdapter;
@@ -122,8 +119,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public void startServerConnection(){
         boolean connectionCheck = isConnectedToInternet();
         if (connectionCheck){
-            Intent intent = new Intent(this, ApiIntentService.class);
-            startService(intent);
+//            Intent intent = new Intent(this, ApiIntentService.class);
+//            startService(intent);
+            snackBar("Connected");
         }else {
             //Toast.makeText(this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
             snackBar("Check Internet Connection");

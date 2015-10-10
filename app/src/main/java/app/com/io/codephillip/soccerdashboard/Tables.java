@@ -19,7 +19,6 @@ public class Tables extends Fragment {
     private String[] tableArray;
     private ListView tableList;
     //private FetchTableTask fetchTableTask;
-    private final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
     private final String imageUrls[] = {
             "52919.png","2605445.png","2601593.png","75027.png","2603039.png","2606733.png"
     };
@@ -57,7 +56,7 @@ public class Tables extends Fragment {
                 //then call the getter methods to get the data
                 String logString = cn.getGoals() + "##" + cn.getPoints()+ "##" + cn.getTeamName()+ cn.getId();
                 Log.d(TAG, logString);
-                tableArrayList.add(cn.getTeamName()+" "+cn.getId());
+                tableArrayList.add(cn.getTeamName());
             }
         }catch (ArrayIndexOutOfBoundsException e){
             e.printStackTrace();
@@ -70,7 +69,8 @@ public class Tables extends Fragment {
         tableArray = new String[tableArrayList.size()];
         tableArray = tableArrayList.toArray(tableArray);
 
-        adapter = new TableListAdapter(getActivity(), tableArray, null);
+        adapter = new TableListAdapter(getActivity(), tableArray, imageUrls);
+//        adapter = new TableListAdapter(getActivity(), tableArray, null);
         tableList.setAdapter(adapter);
 
 		return view;
