@@ -4,41 +4,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="New Text"-->
-        <!--android:id="@+id/textView"-->
-        <!--android:layout_marginLeft="52dp"-->
-        <!--android:layout_marginStart="52dp"-->
-        <!--android:layout_alignBottom="@+id/imageView" android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true"/>-->
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="New Text"-->
-        <!--android:id="@+id/textView2"-->
-        <!--android:layout_above="@+id/textView3" android:layout_toRightOf="@+id/imageView2"-->
-        <!--android:layout_toEndOf="@+id/imageView2" android:layout_marginLeft="26dp"-->
-        <!--android:layout_marginStart="26dp"/>-->
-    <!--<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-              <!--android:text="New Text" android:id="@+id/textView3"-->
-              <!--android:layout_alignBaseline="@+id/textView"-->
-              <!--android:layout_alignBottom="@+id/textView" android:layout_toRightOf="@+id/imageView"-->
-              <!--android:layout_toEndOf="@+id/imageView"/>-->
-    <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"-->
-        <!--android:id="@+id/imageView"-->
-        <!--android:layout_alignParentTop="true" android:layout_toRightOf="@+id/textView"-->
-        <!--android:layout_toEndOf="@+id/textView" android:layout_marginLeft="34dp"-->
-        <!--android:layout_marginStart="34dp"/>-->
-    <!--<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-               <!--android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"-->
-               <!--android:id="@+id/imageView2"-->
-               <!--android:layout_alignParentTop="true" android:layout_toRightOf="@+id/textView3"-->
-               <!--android:layout_toEndOf="@+id/textView3"/>-->
     <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginRight="50dp"
@@ -46,22 +11,18 @@
 
         <ImageView android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
+                   android:id="@+id/awayImageTeam"
                    android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"/>
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:padding="5dp"
                   android:layout_marginTop="15dp"
+                  android:id="@+id/awayTeam"
                   android:text="@string/hello_world"/>
     </LinearLayout>
 
-    <!--<LinearLayout android:layout_width="wrap_content"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:id="@+id/linearLayoutLeft">-->
-
-
-    <!--</LinearLayout>-->
-    <RelativeLayout android:layout_width="wrap_content"
+    <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:id="@+id/centerLayout"
                   android:layout_alignParentTop="true"
@@ -70,32 +31,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time"
-            android:id="@+id/time"
+            android:id="@+id/date"
             android:padding="3dp"
             android:layout_marginTop="7dp"
            />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:padding="5dp"
               android:layout_marginTop="15dp"
-              android:text="@string/hello_world2" android:id="@+id/textView2"
-              android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/imageView"
-              android:layout_toStartOf="@+id/imageView"/>
+              android:text="@string/hello_world2" android:id="@+id/homeTeam"
+              android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/homeTeamImage"
+              android:layout_toStartOf="@+id/homeTeamImage"/>
     <ImageView android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
                android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/centerLayout"
                android:layout_toStartOf="@+id/centerLayout" android:layout_marginRight="21dp"
-               android:layout_marginEnd="21dp" android:id="@+id/imageView"/>
+               android:layout_marginEnd="21dp" android:id="@+id/homeTeamImage"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/score"
         android:id="@+id/score"
-        android:layout_alignBottom="@+id/textView2" android:layout_centerHorizontal="true"/>
+        android:layout_alignBottom="@+id/homeTeam" android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

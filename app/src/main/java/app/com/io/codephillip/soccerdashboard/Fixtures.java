@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class Fixtures extends Fragment {
@@ -24,12 +23,11 @@ public class Fixtures extends Fragment {
                 "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
         };
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
-                android.R.id.text1, fixtureArray
-                );
-
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
+//                android.R.id.text1, fixtureArray
+//                );
+        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, fixtureArray, null, null, null);
         fixtureList.setAdapter(adapter);
-
 		return view;
 	}
 }
