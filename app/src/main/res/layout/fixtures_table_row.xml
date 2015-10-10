@@ -6,20 +6,10 @@
 
     <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_marginRight="50dp"
+                  android:layout_marginRight="100dp"
                   android:layout_alignParentRight="true" android:id="@+id/linearLayout2">
 
-        <ImageView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/awayImageTeam"
-                   android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:padding="5dp"
-                  android:layout_marginTop="15dp"
-                  android:id="@+id/awayTeam"
-                  android:text="@string/hello_world"/>
     </LinearLayout>
 
     <LinearLayout android:layout_width="wrap_content"
@@ -32,6 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/time"
             android:id="@+id/date"
+            android:textSize="10sp"
             android:padding="3dp"
             android:layout_marginTop="7dp"
            />
@@ -41,7 +32,7 @@
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:padding="5dp"
-              android:layout_marginTop="15dp"
+              android:layout_marginTop="10dp"
               android:text="@string/hello_world2" android:id="@+id/homeTeam"
               android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/homeTeamImage"
               android:layout_toStartOf="@+id/homeTeamImage"/>
@@ -49,14 +40,32 @@
                android:layout_height="wrap_content"
                android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
                android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/centerLayout"
-               android:layout_toStartOf="@+id/centerLayout" android:layout_marginRight="21dp"
+               android:layout_toStartOf="@+id/centerLayout" android:layout_marginRight="7dp"
                android:layout_marginEnd="21dp" android:id="@+id/homeTeamImage"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/score"
         android:id="@+id/score"
-        android:layout_alignBottom="@+id/homeTeam" android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/centerLayout" android:layout_centerHorizontal="true"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="5dp"
+              android:layout_marginRight="38dp"
+              android:layout_marginTop="10dp"
+              android:layout_toEndOf="@+id/awayImageTeam"
+              android:layout_toRightOf="@+id/awayImageTeam"
+              android:id="@+id/awayTeam"
+              android:text="@string/hello_world"
+              android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/awayImageTeam"
+               android:layout_marginLeft="216dp"
+               android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"/>
+
 
 
 </RelativeLayout>
+
+    <!--android:layout_alignRight="@+id/linearLayout2"-->
