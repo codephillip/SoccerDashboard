@@ -10,17 +10,28 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
+import app.com.io.codephillip.soccerdashboard.database.Database;
+
 /**
  * Created by codephillip on 10/10/15.
  */
 public class FixturesListAdapter extends ArrayAdapter<String> {
     private String[] date;
     private String[] homeTeamName;
+//            {
+//            "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
+//    };
     private String[] awayTeamName;
     private String[] score;
     private String[] imgId;
     private final Activity context;
     final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
+    private Database database = null;
+    private final ArrayList<String> fixturesArrayList = new ArrayList<String>();
+    int n = 0;
+    String TAG = FixturesListAdapter.class.getSimpleName();
 
 
     public FixturesListAdapter(Activity context, String[] date, String homeTeamName[], String awayTeamName[], String score[], String imgId[]) {
@@ -32,6 +43,7 @@ public class FixturesListAdapter extends ArrayAdapter<String> {
         this.imgId = imgId;
         this.score = score;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -47,9 +59,9 @@ public class FixturesListAdapter extends ArrayAdapter<String> {
 
         try{
             homeTeamNameView.setText(homeTeamName[position]);
-//            awayTeamNameView.setText(awayTeamName[position]);
+            awayTeamNameView.setText(awayTeamName[position]);
 //            dateView.setText(date[position]);
-//            scoreView.setText(score[position]);
+            scoreView.setText(score[position]);
 //            //homeImageView.setImageResource(homeImage[position]);
 //            picassoLoader(imageBaseUrl+imgId[position], homeImageView);
 //            picassoLoader(imageBaseUrl+imgId[position], awayImageView);
