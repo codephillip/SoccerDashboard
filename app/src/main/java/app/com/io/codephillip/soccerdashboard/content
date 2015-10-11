@@ -26,10 +26,17 @@
 
       ###TODO###
       +add search to the fixture tab
-      +add spinner in the actionbar
+      +add spinner in the actionbar, use shared preferences
       +make predictions algorithm
-      +image urls
       +add title to the listviews
+      +reduce team name length
+      +add date to classify fixtures
+      +research and redesign predictions fragment
+      +add pull-to-refresh
+      +display predictions according to days... today, yesterday, tomorrow
+      +feature to allow guys post their own predictions
+      +fix blank screen after data from table is deleted by using a broadcast receiver to trigger the listview again
+      +add a broadcast receiver to detect when there is internet connection, then start the intentservice to fetch and update the app
 
 
 
