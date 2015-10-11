@@ -1,7 +1,9 @@
 package app.com.io.codephillip.soccerdashboard;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +24,15 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     private ViewPager pager;
     private ActionBar actionBar;
     private View parentLayout;
+    private IntentFilter intentFilter;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        intentFilter = new IntentFilter();
+        intentFilter.addAction("FINISHED SERVICE");
+        registerReceiver(intentReceiver, intentFilter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         pager = (ViewPager) findViewById(R.id.pager);
         parentLayout = findViewById(R.id.pager);
         actionBar = getSupportActionBar();
+//        intentFilter = new IntentFilter();
+//        intentFilter.addAction("FINISHED SERVICE");
+//        registerReceiver(intentReceiver, intentFilter);
         startServerConnection();
         pageAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pageAdapter);
@@ -137,4 +152,13 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         snackbarView.setBackgroundColor(getResources().getColor(R.color.red));
         snackbar.show();
     }
+
+    private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("BROADCAST###", "BROADCAST RECEIVED");
+//            Toast.makeText(getActivity(), "Received broadcast from service",
+//            Toast.LENGTH_LONG).show();
+        }
+    };
 }

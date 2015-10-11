@@ -28,6 +28,18 @@ public class ApiIntentService extends IntentService {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("SERVICE###", "SERVICE STOPPED");
+    }
+
+    @Override
+    public void onStart(Intent intent, int startId) {
+        super.onStart(intent, startId);
+        Log.d("SERVICE###", "SERVICE STARTED");
+    }
+
+    @Override
     protected void onHandleIntent(Intent intent) {
 //        try {
 //            database = new Database(this);
@@ -36,20 +48,22 @@ public class ApiIntentService extends IntentService {
 //        }catch (Exception e){
 //            e.printStackTrace();
 //        }
+        Log.d("SERVICE###", "SERVICE WORKING");
+        broadcastStarter();
 
-        try {
-            int k;
-            for (k=0; k<2 ; k++){
-                if (k == 0){
-                    getTableDataJson(connectToServer(BarclaysPLTableUrl));
-                } else if (k == 1) {
-                    getFixtureDataJson(connectToServer(BarclaysPLFixturesUrl));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d("URL BUG", e.toString());
-        }
+//        try {
+//            int k;
+//            for (k=0; k<2 ; k++){
+//                if (k == 0){
+//                    getTableDataJson(connectToServer(BarclaysPLTableUrl));
+//                } else if (k == 1) {
+//                    getFixtureDataJson(connectToServer(BarclaysPLFixturesUrl));
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.d("URL BUG", e.toString());
+//        }
     }
 
     private Void getTableDataJson(String jsonData) throws JSONException {
@@ -130,6 +144,7 @@ public class ApiIntentService extends IntentService {
             Log.d(TAG, date +"#"+ status +"#"+ homeTeamName +"#"+ awayTeamName +"#"+ goalsAwayTeam +"#"+ goalsAwayTeam);
             storeInFixtureTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam);
         }
+        broadcastStarter();
     }
 
     private String connectToServer(String urlConnection) throws Exception{
@@ -150,5 +165,12 @@ public class ApiIntentService extends IntentService {
     private void storeInFixtureTable(String date, String status, String homeTeamName, String awayTeamName, String goalsHomeTeam, String goalsAwayTeam){
         database = new Database(this);
         database.addFixtures(new FixturesTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam));
+    }
+
+    private void broadcastStarter(){
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("FINISHED SERVICE");
+        getBaseContext().sendBroadcast(broadcastIntent);
+        Log.d("BROADCAST###", "BROADCAST SENT");
     }
 }

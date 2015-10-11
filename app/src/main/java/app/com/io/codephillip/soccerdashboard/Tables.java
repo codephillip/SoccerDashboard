@@ -1,5 +1,6 @@
 package app.com.io.codephillip.soccerdashboard;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import app.com.io.codephillip.soccerdashboard.database.LeagueTable;
 public class Tables extends Fragment {
     private String[] tableArray;
     private ListView tableList;
+    private IntentFilter intentFilter;
     //private FetchTableTask fetchTableTask;
 //    private final String imageUrls[] = {
 //            "52919.png","2605445.png","2601593.png","75027.png","2603039.png","2606733.png"
@@ -53,6 +55,14 @@ public class Tables extends Fragment {
     public void onPause() {
         super.onPause();
         database.close();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        intentFilter = new IntentFilter();
+//        intentFilter.addAction("FINISHED SERVICE");
+//        getActivity().registerReceiver(intentReceiver, intentFilter);
     }
 
     @Override
@@ -97,6 +107,15 @@ public class Tables extends Fragment {
 
 		return view;
 	}
+
+//    private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            Log.d("BROADCAST###", "BROADCAST RECEIVED");
+////            Toast.makeText(getActivity(), "Received broadcast from service",
+////            Toast.LENGTH_LONG).show();
+//        }
+//    };
 
 //    class FetchTableTask extends AsyncTask<String, Void, Void>{
 //
