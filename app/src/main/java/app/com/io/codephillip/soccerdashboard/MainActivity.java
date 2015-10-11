@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 //        intentFilter.addAction("FINISHED SERVICE");
 //        registerReceiver(intentReceiver, intentFilter);
         startServerConnection();
-        pageAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-        pager.setAdapter(pageAdapter);
+//        pageAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+//        pager.setAdapter(pageAdapter);
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -159,6 +159,12 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             Log.d("BROADCAST###", "BROADCAST RECEIVED");
 //            Toast.makeText(getActivity(), "Received broadcast from service",
 //            Toast.LENGTH_LONG).show();
+            pageAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+            pager.setAdapter(pageAdapter);
+            int n=0;
+            for (; n < 5; n++){
+                Log.d("BROADCAST###", "LOOPING INSIDE BROADCAST");
+            }
         }
     };
 }

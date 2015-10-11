@@ -31,6 +31,7 @@ public class ApiIntentService extends IntentService {
     public void onDestroy() {
         super.onDestroy();
         Log.d("SERVICE###", "SERVICE STOPPED");
+        broadcastStarter();
     }
 
     @Override
@@ -49,7 +50,6 @@ public class ApiIntentService extends IntentService {
 //            e.printStackTrace();
 //        }
         Log.d("SERVICE###", "SERVICE WORKING");
-        broadcastStarter();
 
 //        try {
 //            int k;
