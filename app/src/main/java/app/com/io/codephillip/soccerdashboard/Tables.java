@@ -51,6 +51,7 @@ public class Tables extends Fragment {
     private final String TAG = Tables.class.getSimpleName();
     private TableListAdapter adapter;
     private final ArrayList<String> tableArrayList = new ArrayList<String>();
+    private int n = 0;
 
     public void onPause() {
         super.onPause();
@@ -80,19 +81,26 @@ public class Tables extends Fragment {
         database = new Database(getActivity());
 //        database.addLeagueTableData(new LeagueTable("4", "6", "4", "4", "6", "4", "7"));
 
-//        //database returns a list of objects which will be stored in leagueTablelist
-        final List<LeagueTable> leagueTableList = database.getLeagueTableData();
-        try{
-            //fetch the objects from the list and store them in cn(LeagueTable object variable)
-            for(LeagueTable cn: leagueTableList){
-                //then call the getter methods to get the data
-                String logString = cn.getGoals() + "##" + cn.getPoints()+ "##" + cn.getTeamName()+ cn.getId();
-                Log.d(TAG, logString);
-                tableArrayList.add(cn.getTeamName());
+//
+        do{
+            Log.d("SQL###$$$", "league table data from the database");
+            //database returns a list of objects which will be stored in leagueTablelist
+            final List<LeagueTable> leagueTableList = database.getLeagueTableData();
+            try{
+                //fetch the objects from the list and store them in cn(LeagueTable object variable)
+                for(LeagueTable cn: leagueTableList){
+                    //then call the getter methods to get the data
+                    String logString = cn.getGoals() + "##" + cn.getPoints()+ "##" + cn.getTeamName()+ cn.getId();
+                    Log.d(TAG, logString);
+                    tableArrayList.add(cn.getTeamName());
+                    Log.d("ARRAYLISTCONTENT###$$$", "ADDING CONTENT TO ARRAY LIST" + cn.getTeamName());
+                }
+            }catch (ArrayIndexOutOfBoundsException e){
+                e.printStackTrace();
             }
-        }catch (ArrayIndexOutOfBoundsException e){
-            e.printStackTrace();
-        }
+            n++;
+        }while (tableArrayList.get(0) == null && n < 3 );
+        Log.d("ARRAYLISTCONTENT###","POSITION ZERO, "+tableArrayList.get(0));
 
         for (String k: tableArrayList){
             Log.d("ARRAYLISTCONTENT", k);
