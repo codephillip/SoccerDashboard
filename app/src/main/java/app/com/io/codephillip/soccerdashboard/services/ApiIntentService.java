@@ -31,7 +31,7 @@ public class ApiIntentService extends IntentService {
     public void onDestroy() {
         super.onDestroy();
         Log.d("SERVICE###", "SERVICE STOPPED");
-        broadcastStarter();
+      //  broadcastStarter();
     }
 
     @Override
@@ -44,26 +44,39 @@ public class ApiIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         try {
             database = new Database(this);
-//            database.deleteLeagueTable(new LeagueTable(0));
-            database.deleteFixturesTable(new FixturesTable(0));
+            database.deleteLeagueTable(new LeagueTable(0));
+//            database.deleteFixturesTable(new FixturesTable(0));
         }catch (Exception e){
             e.printStackTrace();
         }
         Log.d("SERVICE###", "SERVICE WORKING");
 
-//        try {
-//            int k;
-//            for (k=0; k<2 ; k++){
-//                if (k == 0){
+        try {
+            int k;
+            for (k=0; k<2 ; k++){
+                if (k == 0){
 //                    getTableDataJson(connectToServer(BarclaysPLTableUrl));
-//                } else if (k == 1) {
+                    String position="4";
+                    String teamName="4";
+                    String points="4";
+                    String goals="4";
+                    String values="4";
+                    String goalsAgainst="4";
+                    String goalDifference="4";
+                    database = new Database(this);
+                    storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference);
+                    storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference);
+                    storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference);
+                    database.close();
+                } else if (k == 1) {
 //                    getFixtureDataJson(connectToServer(BarclaysPLFixturesUrl));
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Log.d("URL BUG", e.toString());
-//        }
+                    Log.d("SERVICE","IF 1");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("URL BUG", e.toString());
+        }
     }
 
     private Void getTableDataJson(String jsonData) throws JSONException {
@@ -144,7 +157,7 @@ public class ApiIntentService extends IntentService {
             Log.d(TAG, date +"#"+ status +"#"+ homeTeamName +"#"+ awayTeamName +"#"+ goalsAwayTeam +"#"+ goalsAwayTeam);
             storeInFixtureTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam);
         }
-        broadcastStarter();
+       // broadcastStarter();
     }
 
     private String connectToServer(String urlConnection) throws Exception{
@@ -167,10 +180,10 @@ public class ApiIntentService extends IntentService {
         database.addFixtures(new FixturesTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam));
     }
 
-    private void broadcastStarter(){
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction("FINISHED SERVICE");
-        getBaseContext().sendBroadcast(broadcastIntent);
-        Log.d("BROADCAST###", "BROADCAST SENT");
-    }
+//    private void broadcastStarter(){
+//        Intent broadcastIntent = new Intent();
+//        broadcastIntent.setAction("FINISHED SERVICE");
+//        getBaseContext().sendBroadcast(broadcastIntent);
+//        Log.d("BROADCAST###", "BROADCAST SENT");
+//    }
 }

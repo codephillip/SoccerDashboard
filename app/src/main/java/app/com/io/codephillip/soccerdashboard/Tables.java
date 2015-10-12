@@ -70,6 +70,7 @@ public class Tables extends Fragment {
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.tables_layout, container, false);
+        Log.d("TABLES###$$$", "TABLE FRAGMENT CREATED");
 
         tableList = (ListView) view.findViewById(R.id.lv_tables);
 //        fetchTableTask = new FetchTableTask();
@@ -83,7 +84,26 @@ public class Tables extends Fragment {
 
 //
         do{
+//            if (n >= 1){
+//                Thread timer = new Thread(){
+//                    public void run(){
+//                        try {
+//                            Log.d("THREAD","SLEEPING");
+//                            sleep(10000);
+//                        }catch (InterruptedException e){
+//                            e.printStackTrace();
+//                            Log.d("THREAD", "INTERRUPTED");
+//                        }
+//                    }
+//                };
+//                timer.start();
+//                Log.d("THREAD", "AWAKE");
+//            }
+
             Log.d("SQL###$$$", "league table data from the database");
+            n++;
+
+
             //database returns a list of objects which will be stored in leagueTablelist
             final List<LeagueTable> leagueTableList = database.getLeagueTableData();
             try{
@@ -94,25 +114,38 @@ public class Tables extends Fragment {
                     Log.d(TAG, logString);
                     tableArrayList.add(cn.getTeamName());
                     Log.d("ARRAYLISTCONTENT###$$$", "ADDING CONTENT TO ARRAY LIST" + cn.getTeamName());
+                    if(tableArrayList.get(0) != null)
+                        n = 4;
                 }
             }catch (ArrayIndexOutOfBoundsException e){
                 e.printStackTrace();
             }
-            n++;
-        }while (tableArrayList.get(0) == null && n < 3 );
-        Log.d("ARRAYLISTCONTENT###","POSITION ZERO, "+tableArrayList.get(0));
+        }while (n < 10);
 
-        for (String k: tableArrayList){
-            Log.d("ARRAYLISTCONTENT", k);
+        try{
+            Log.d("ARRAYLISTCONTENT###","POSITION ZERO, "+tableArrayList.get(0));
+
+            for (String k: tableArrayList){
+                Log.d("ARRAYLISTCONTENT", k);
+            }
+
+            tableArray = new String[tableArrayList.size()];
+            tableArray = tableArrayList.toArray(tableArray);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            n = 3;
         }
 
-        tableArray = new String[tableArrayList.size()];
-        tableArray = tableArrayList.toArray(tableArray);
-
-        adapter = new TableListAdapter(getActivity(), tableArray, imageUrls);
+        if (n == 4){
+            Log.d("ADAPTER", "LOADING ADAPTER");
+            adapter = new TableListAdapter(getActivity(), tableArray, imageUrls);
 //        adapter = new TableListAdapter(getActivity(), tableArray, null);
-        tableList.setAdapter(adapter);
-
+            tableList.setAdapter(adapter);
+        }else {
+            Log.d("ADAPTER", "CANT LOAD THE ADAPTER AND LISTVIEW");
+        }
 		return view;
 	}
 
