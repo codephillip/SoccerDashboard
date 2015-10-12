@@ -52,8 +52,8 @@ public class ApiIntentService extends IntentService {
         Log.d("SERVICE###", "SERVICE WORKING");
 
         try {
-            int k;
-            for (k=0; k<2 ; k++){
+            int k = 0;
+           // for (k=0; k<2 ; k++){
                 if (k == 0){
 //                    getTableDataJson(connectToServer(BarclaysPLTableUrl));
                     String position="4";
@@ -63,7 +63,7 @@ public class ApiIntentService extends IntentService {
                     String values="4";
                     String goalsAgainst="4";
                     String goalDifference="4";
-                    database = new Database(this);
+                  //  database = new Database(this);
                     storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference);
                     storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference);
                     storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference);
@@ -71,7 +71,7 @@ public class ApiIntentService extends IntentService {
                 } else if (k == 1) {
 //                    getFixtureDataJson(connectToServer(BarclaysPLFixturesUrl));
                     Log.d("SERVICE","IF 1");
-                }
+               // }
             }
         } catch (Exception e) {
             e.printStackTrace();

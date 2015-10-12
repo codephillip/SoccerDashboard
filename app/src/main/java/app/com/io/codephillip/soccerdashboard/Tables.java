@@ -81,6 +81,8 @@ public class Tables extends Fragment {
 //        };
         database = new Database(getActivity());
 //        database.addLeagueTableData(new LeagueTable("4", "6", "4", "4", "6", "4", "7"));
+        //database returns a list of objects which will be stored in leagueTablelist
+        final List<LeagueTable> leagueTableList = database.getLeagueTableData();
 
 //
         do{
@@ -103,9 +105,6 @@ public class Tables extends Fragment {
             Log.d("SQL###$$$", "league table data from the database");
             n++;
 
-
-            //database returns a list of objects which will be stored in leagueTablelist
-            final List<LeagueTable> leagueTableList = database.getLeagueTableData();
             try{
                 //fetch the objects from the list and store them in cn(LeagueTable object variable)
                 for(LeagueTable cn: leagueTableList){
@@ -120,7 +119,7 @@ public class Tables extends Fragment {
             }catch (ArrayIndexOutOfBoundsException e){
                 e.printStackTrace();
             }
-        }while (n < 10);
+        }while (n < 3);
 
         try{
             Log.d("ARRAYLISTCONTENT###","POSITION ZERO, "+tableArrayList.get(0));
@@ -133,10 +132,12 @@ public class Tables extends Fragment {
             tableArray = tableArrayList.toArray(tableArray);
 
         }catch (Exception e){
-            e.printStackTrace();
-        }finally {
             n = 3;
+            e.printStackTrace();
         }
+//        finally {
+//            n = 3;
+//        }
 
         if (n == 4){
             Log.d("ADAPTER", "LOADING ADAPTER");
