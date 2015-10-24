@@ -28,7 +28,7 @@
               android:text="@string/hello_world2" android:id="@+id/homeTeam"
               android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/homeTeamImage"
               android:layout_toStartOf="@+id/homeTeamImage"/>
-    <ImageView android:layout_width="wrap_content"
+    <ImageView android:layout_width="40dp"
                android:layout_height="wrap_content"
                android:layout_marginTop="7dp"
                android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
@@ -50,7 +50,7 @@
               android:id="@+id/awayTeam"
               android:text="@string/hello_world"
               android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
-    <ImageView android:layout_width="wrap_content"
+    <ImageView android:layout_width="40dp"
                android:layout_height="wrap_content"
                android:id="@+id/awayImageTeam"
                android:layout_marginTop="7dp"
