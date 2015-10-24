@@ -17,6 +17,9 @@ import app.com.io.codephillip.soccerdashboard.database.LeagueTable;
 
 public class Tables extends Fragment {
     private String[] tableArray;
+    private String[] debugTableArray = new String[]{
+            "Arsenal FC","Manchester United FC","Everton FC","Watford FC", "Norwich City FC", "Swansea City FC"
+    };
     private ListView tableList;
     //private FetchTableTask fetchTableTask;
 //    private final String imageUrls[] = {
@@ -91,7 +94,7 @@ public class Tables extends Fragment {
         tableArray = new String[tableArrayList.size()];
         tableArray = tableArrayList.toArray(tableArray);
 
-        adapter = new TableListAdapter(getActivity(), tableArray, imageUrls);
+        adapter = new TableListAdapter(getActivity(), debugTableArray, imageUrls);
 //        adapter = new TableListAdapter(getActivity(), tableArray, null);
         tableList.setAdapter(adapter);
 

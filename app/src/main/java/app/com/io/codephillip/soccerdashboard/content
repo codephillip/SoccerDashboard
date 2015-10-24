@@ -38,5 +38,20 @@
       +fix blank screen after data from table is deleted by using a broadcast receiver to trigger the listview again
       +add a broadcast receiver to detect when there is internet connection, then start the intentservice to fetch and update the app
 
+      +content provider
+      +cursorLoader
+      +search bar,(fab)
+      +alarms
+      +notifications
+      +network state
+      +team statistics when you click on listview(draws,wins,losses, team members) for league table tab
+      +head2head for fixtures tab
+      +back-to-top for fixtures tab
+      +game predictions algorithms
+      +separate the finished games from upcoming
+      +organise the fixtures in terms of days
+      +manually update the api from sites
+      +remove the negative signs from fixtures
+
 
 

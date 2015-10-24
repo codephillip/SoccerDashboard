@@ -15,8 +15,8 @@
                       android:layout_height="wrap_content"
                       android:text="1"
                       android:id="@+id/teamposition"
-                      android:layout_marginTop="13dp"
-                      android:textSize="16sp"
+                      android:layout_marginTop="10dp"
+                      android:textAppearance="?android:textAppearanceSmall"
                       android:layout_weight="8"
                       android:padding="2dp"/>
         </LinearLayout>
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"/>
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"/>
 
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"/>
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"/>
 
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"/>
 
@@ -92,7 +92,7 @@
                 android:text="6"
                 android:textColorHint="#30bcff"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="12dp"/>
@@ -102,15 +102,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chelsea"
+        android:textSize="15sp"
         android:layout_alignBottom="@+id/linearLayout" android:layout_toRightOf="@+id/icon"
         android:layout_toEndOf="@+id/icon"/>
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:padding="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" android:layout_marginLeft="17dp"
         android:layout_marginStart="17dp" android:src="@mipmap/ic_launcher"/>
