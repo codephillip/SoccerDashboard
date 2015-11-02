@@ -68,7 +68,7 @@ public class SoccerProvider extends ContentProvider {
 
             case LEAGUE_TABLE:
                 retCursor = db.query(
-                        SoccerContract.FixturesTable.LeagueTable.CONTENT_TYPE,
+                        SoccerContract.LeagueTable.CONTENT_TYPE,
                         projection,
                         selection,
                         selectionArgs,
@@ -80,7 +80,7 @@ public class SoccerProvider extends ContentProvider {
 
             case LEAGUE_TABLE_WITH_TEAM:
                 retCursor = db.query(
-                        SoccerContract.FixturesTable.LeagueTable.CONTENT_ITEM_TYPE,
+                        SoccerContract.LeagueTable.CONTENT_ITEM_TYPE,
                         projection,
                         selection,
                         selectionArgs,
@@ -108,9 +108,9 @@ public class SoccerProvider extends ContentProvider {
             case FIXTURES_WITH_TEAM:
                 return SoccerContract.FixturesTable.CONTENT_ITEM_TYPE;
             case LEAGUE_TABLE:
-                return SoccerContract.FixturesTable.LeagueTable.CONTENT_TYPE;
+                return SoccerContract.LeagueTable.CONTENT_TYPE;
             case LEAGUE_TABLE_WITH_TEAM:
-                return SoccerContract.FixturesTable.CONTENT_ITEM_TYPE;
+                return SoccerContract.LeagueTable.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("unknown uri: "+ uri);
         }
@@ -133,9 +133,9 @@ public class SoccerProvider extends ContentProvider {
             }
 
             case LEAGUE_TABLE:{
-                long id = db.insert(SoccerContract.FixturesTable.LeagueTable.LEAGUETABLE, null, contentValues);
+                long id = db.insert(SoccerContract.LeagueTable.LEAGUETABLE, null, contentValues);
                 if (id > 0){
-                    returnUri = SoccerContract.FixturesTable.LeagueTable.buildUri(id);
+                    returnUri = SoccerContract.LeagueTable.buildUri(id);
                 } else{
                     throw new android.database.SQLException("failed to insert into table: "+uri);
                 }

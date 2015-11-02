@@ -36,26 +36,27 @@ public class SoccerContract {
             return ContentUris.withAppendedId(CONTENT_URI,id);
         }
 
-        public static final class LeagueTable implements BaseColumns{
-            public static final  String LEAGUETABLE = "leagueTable";
+    }
 
-            //leaguetable columns
-            public static final String TAG_POSITION = "position";
-            public static final String TAG_TEAM_NAME = "teamName";
-            public static final String TAG_POINTS = "points";
-            public static final String TAG_GOALS = "goals";
-            public static final String TAG_GOALS_AGAINST = "goalsAgainst";
-            public static final String TAG_GOALS_DIFFERENCE = "goalsDifference";
+    public static final class LeagueTable implements BaseColumns{
+        public static final  String LEAGUETABLE = "leagueTable";
 
-            public static Uri CONTENT_URI = BASE_URI.buildUpon().appendPath(PATH_LEAGUE_TABLE).build();
+        //leaguetable columns
+        public static final String TAG_POSITION = "position";
+        public static final String TAG_TEAM_NAME = "teamName";
+        public static final String TAG_POINTS = "points";
+        public static final String TAG_GOALS = "goals";
+        public static final String TAG_GOALS_AGAINST = "goalsAgainst";
+        public static final String TAG_GOALS_DIFFERENCE = "goalsDifference";
 
-            //mime type
-            public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LEAGUE_TABLE;
-            public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LEAGUE_TABLE;
+        public static Uri CONTENT_URI = BASE_URI.buildUpon().appendPath(PATH_LEAGUE_TABLE).build();
 
-            public static Uri buildUri(long id){
-                return ContentUris.withAppendedId(CONTENT_URI, id);
-            }
+        //mime type
+        public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LEAGUE_TABLE;
+        public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LEAGUE_TABLE;
+
+        public static Uri buildUri(long id){
+            return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
 }
