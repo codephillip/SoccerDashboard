@@ -38,8 +38,64 @@ public class SoccerProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] strings, String s, String[] strings1, String s1) {
-        return null;
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        Cursor retCursor = null;
+        SQLiteDatabase db = soccerDbHelper.getReadableDatabase();
+        switch (sUriMatcher.match(uri)){
+            case FIXTURES:
+                retCursor = db.query(
+                        SoccerContract.FixturesTable.CONTENT_TYPE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                        );
+                break;
+
+            case FIXTURES_WITH_TEAM:
+                retCursor = db.query(
+                        SoccerContract.FixturesTable.CONTENT_ITEM_TYPE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+
+            case LEAGUE_TABLE:
+                retCursor = db.query(
+                        SoccerContract.FixturesTable.LeagueTable.CONTENT_TYPE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+
+            case LEAGUE_TABLE_WITH_TEAM:
+                retCursor = db.query(
+                        SoccerContract.FixturesTable.LeagueTable.CONTENT_ITEM_TYPE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+
+                default:
+                    throw new UnsupportedOperationException("Unknown Uri: "+uri);
+        }
+
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return retCursor;
     }
 
     @Nullable
