@@ -129,6 +129,7 @@ public class SoccerProvider extends ContentProvider {
                 } else{
                     throw new android.database.SQLException("failed to insert into table: "+uri);
                 }
+                break;
             }
 
             case LEAGUE_TABLE:{
@@ -138,6 +139,7 @@ public class SoccerProvider extends ContentProvider {
                 } else{
                     throw new android.database.SQLException("failed to insert into table: "+uri);
                 }
+                break;
             }
             default:
                 throw new UnsupportedOperationException("Wrond uri: "+uri);
