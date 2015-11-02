@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
@@ -17,6 +18,8 @@ public class SoccerProvider extends ContentProvider {
     private final int LEAGUE_TABLE = 200;
     private final int LEAGUE_TABLE_WITH_TEAM = 201;
 
+    private SoccerDbHelper soccerDbHelper;
+
     private UriMatcher buildUriMatcher() {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = SoccerContract.CONTENT_AUTHORITY;
@@ -29,7 +32,8 @@ public class SoccerProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        return false;
+        soccerDbHelper = new SoccerDbHelper(getContext());
+        return true;
     }
 
     @Nullable
@@ -59,7 +63,31 @@ public class SoccerProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        return null;
+        Uri returnUri;
+        SQLiteDatabase db = soccerDbHelper.getWritableDatabase();
+        switch (sUriMatcher.match(uri)){
+            case FIXTURES:{
+                long id = db.insert(SoccerContract.FixturesTable.FIXTURES_TABLE, null, contentValues);
+                if (id > 0){
+                    returnUri = SoccerContract.FixturesTable.buildUri(id);
+                } else{
+                    throw new android.database.SQLException("failed to insert into table: "+uri);
+                }
+            }
+
+            case LEAGUE_TABLE:{
+                long id = db.insert(SoccerContract.FixturesTable.LeagueTable.LEAGUETABLE, null, contentValues);
+                if (id > 0){
+                    returnUri = SoccerContract.FixturesTable.LeagueTable.buildUri(id);
+                } else{
+                    throw new android.database.SQLException("failed to insert into table: "+uri);
+                }
+            }
+            default:
+                throw new UnsupportedOperationException("Wrond uri: "+uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return returnUri;
     }
 
     @Override
