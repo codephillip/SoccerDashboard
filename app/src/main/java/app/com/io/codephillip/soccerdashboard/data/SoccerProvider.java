@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by codephillip on 11/2/15.
@@ -149,8 +150,25 @@ public class SoccerProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+    public int delete (Uri uri, String selection, String[] selectionArgs) {
+        SQLiteDatabase db = soccerDbHelper.getWritableDatabase();
+        int rowDeleted;
+        Log.d("CONTENT_DELETE: ", "STARTED DELETE");
+        if (selection == null) selection = "1";
+        switch (sUriMatcher.match(uri)){
+            case FIXTURES:
+                rowDeleted = db.delete(SoccerContract.FixturesTable.FIXTURES_TABLE, selection, selectionArgs);
+                break;
+            case LEAGUE_TABLE:
+                rowDeleted = db.delete(SoccerContract.LeagueTable.LEAGUETABLE, selection, selectionArgs);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown Uri: "+ uri);
+        }
+        if (rowDeleted != 0){
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowDeleted;
     }
 
     @Override
