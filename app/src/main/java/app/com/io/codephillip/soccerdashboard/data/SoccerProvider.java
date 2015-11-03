@@ -44,7 +44,7 @@ public class SoccerProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)){
             case FIXTURES:
                 retCursor = db.query(
-                        SoccerContract.FixturesTable.CONTENT_TYPE,
+                        SoccerContract.FixturesTable.FIXTURES_TABLE,
                         projection,
                         selection,
                         selectionArgs,
@@ -56,7 +56,7 @@ public class SoccerProvider extends ContentProvider {
 
             case FIXTURES_WITH_TEAM:
                 retCursor = db.query(
-                        SoccerContract.FixturesTable.CONTENT_ITEM_TYPE,
+                        SoccerContract.FixturesTable.FIXTURES_TABLE,
                         projection,
                         selection,
                         selectionArgs,
@@ -68,7 +68,7 @@ public class SoccerProvider extends ContentProvider {
 
             case LEAGUE_TABLE:
                 retCursor = db.query(
-                        SoccerContract.LeagueTable.CONTENT_TYPE,
+                        SoccerContract.LeagueTable.LEAGUETABLE,
                         projection,
                         selection,
                         selectionArgs,
@@ -80,7 +80,7 @@ public class SoccerProvider extends ContentProvider {
 
             case LEAGUE_TABLE_WITH_TEAM:
                 retCursor = db.query(
-                        SoccerContract.LeagueTable.CONTENT_ITEM_TYPE,
+                        SoccerContract.LeagueTable.LEAGUETABLE,
                         projection,
                         selection,
                         selectionArgs,

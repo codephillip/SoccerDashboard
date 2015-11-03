@@ -26,6 +26,9 @@
             android:name=".services.ApiIntentService"
             android:exported="false" >
         </service>
+
+        <provider android:authorities="app.com.io.codephillip.soccerdashboard"
+                  android:name=".data.SoccerProvider"/>
     </application>
 
 </manifest>
