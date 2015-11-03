@@ -1,20 +1,22 @@
 package app.com.io.codephillip.soccerdashboard;
 
+import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import app.com.io.codephillip.soccerdashboard.services.ApiIntentService;
+import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
     private TabsPagerAdapter pageAdapter;
@@ -122,9 +124,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public void startServerConnection(){
         boolean connectionCheck = isConnectedToInternet();
         if (connectionCheck){
-            Intent intent = new Intent(this, ApiIntentService.class);
-            startService(intent);
+//            Intent intent = new Intent(this, ApiIntentService.class);
+//            startService(intent);
 //            snackBar("Connected");
+            testDbInsert();
         }else {
             //Toast.makeText(this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
             snackBar("Check Internet Connection");
@@ -136,5 +139,29 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(getResources().getColor(R.color.red));
         snackbar.show();
+    }
+
+    private void testDbInsert(){
+        int n;
+        for (n = 0 ; n < 3; n++) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(SoccerContract.LeagueTable.TAG_POSITION, "2");
+            contentValues.put(SoccerContract.LeagueTable.TAG_TEAM_NAME, "Arsenal");
+            contentValues.put(SoccerContract.LeagueTable.TAG_POINTS, "6");
+            contentValues.put(SoccerContract.LeagueTable.TAG_GOALS, "12");
+            contentValues.put(SoccerContract.LeagueTable.TAG_GOALS_AGAINST, "3");
+            contentValues.put(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE, "4");
+
+            Uri uri = getContentResolver().insert(SoccerContract.LeagueTable.CONTENT_URI, contentValues);
+            Log.d("URI_INSERT: ", uri.toString());
+
+
+       /* public static final String TAG_POSITION = "position";
+        public static final String TAG_TEAM_NAME = "teamName";
+        public static final String TAG_POINTS = "points";
+        public static final String TAG_GOALS = "goals";
+        public static final String TAG_GOALS_AGAINST = "goalsAgainst";
+        public static final String TAG_GOALS_DIFFERENCE = "goalsDifference";*/
+        }
     }
 }
