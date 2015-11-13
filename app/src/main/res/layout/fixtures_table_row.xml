@@ -1,64 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:minHeight="?android:attr/listPreferredItemHeight"
+              android:orientation="horizontal">
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/centerLayout"
-                  android:layout_alignParentTop="true"
-                  android:layout_centerHorizontal="true">
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
         <TextView
+            android:id="@+id/homeTeam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/time"
-            android:id="@+id/date"
-            android:textSize="10sp"
-            android:padding="3dp"
-            android:layout_marginTop="5dp"
-            />
-
+            android:text="Chelsea FC"
+            android:layout_gravity="right"/>
     </LinearLayout>
 
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:padding="5dp"
-              android:layout_marginTop="10dp"
-              android:text="@string/hello_world2" android:id="@+id/homeTeam"
-              android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/homeTeamImage"
-              android:layout_toStartOf="@+id/homeTeamImage"/>
-    <ImageView android:layout_width="40dp"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="9dp"
-               android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
-               android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/centerLayout"
-               android:layout_toStartOf="@+id/centerLayout" android:layout_marginRight="7dp"
-               android:layout_marginEnd="21dp" android:id="@+id/homeTeamImage"/>
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/homeTeamImage"
+            android:layout_gravity="center"
+            android:src="@drawable/chelsea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/score"
-        android:id="@+id/score"
-        android:layout_below="@+id/centerLayout" android:layout_centerHorizontal="true"/>
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:padding="5dp"
-              android:layout_marginTop="10dp"
-              android:layout_toEndOf="@+id/awayImageTeam"
-              android:layout_toRightOf="@+id/awayImageTeam"
-              android:id="@+id/awayTeam"
-              android:text="@string/hello_world"
-              android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
-    <ImageView android:layout_width="40dp"
-               android:layout_height="wrap_content"
-               android:id="@+id/awayImageTeam"
-               android:layout_marginTop="9dp"
-               android:layout_marginLeft="216dp"
-               android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"/>
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="16:00"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceSmall"/>
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0 - 1"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:textAppearance="?android:textAppearanceSmall"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/awayImageTeam"
+            android:layout_gravity="center"
+            android:src="@drawable/chelsea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/awayTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arsenal FC"
+            android:layout_gravity="left"
+        />
+
+        <!--<TextView-->
+        <!--android:id="@+id/list_item_forecast_textview"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:textAppearance="?android:textAppearanceSmall"/>-->
+    </LinearLayout>
 
 
-
-</RelativeLayout>
-
-    <!--android:layout_alignRight="@+id/linearLayout2"-->
+</LinearLayout>
