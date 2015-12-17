@@ -27,12 +27,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
                 return new Tables();
             case 1:
                 return new Fixtures();
-
-
-
-
-		default:
-			return null;
+		    default:
+		    	return null;
 		}
 	}
 
