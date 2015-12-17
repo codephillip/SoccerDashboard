@@ -62,7 +62,12 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         /* Standings represents Tables in the code, database , everywhere */
-        String[] tabs = { "Predictions", "Standings",
+
+        //removed the predictions in version 1
+//        String[] tabs = { "Predictions", "Standings",
+//                "Fixtures" };
+
+        String[] tabs = { "Standings",
                 "Fixtures" };
 
         for (String tab_name : tabs) {

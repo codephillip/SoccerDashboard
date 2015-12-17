@@ -13,12 +13,23 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public Fragment getItem(int position) {
 		switch (position) {
-		case 0:
-			return new Predictions();
-		case 1:
-			return new Tables();
-		case 2:
-			return new Fixtures();
+//		case 0:
+//			return new Predictions();
+//		case 1:
+//			return new Tables();
+//		case 2:
+//			return new Fixtures();
+
+            //removed the predictions tab as I build the predictions algorithm for version 2
+//            case 0:
+//                return new Predictions();
+            case 0:
+                return new Tables();
+            case 1:
+                return new Fixtures();
+
+
+
 
 		default:
 			return null;
@@ -27,7 +38,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
-		return 3;
+		return 2;
+//		return 3;
 	}
 
 }
