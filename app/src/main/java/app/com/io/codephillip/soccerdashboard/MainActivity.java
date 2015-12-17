@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        String[] tabs = { "Predictions", "Tables",
+        /* Standings represents Tables in the code, database , everywhere */
+        String[] tabs = { "Predictions", "Standings",
                 "Fixtures" };
 
         for (String tab_name : tabs) {
@@ -73,7 +74,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 //        apiIntentService.startS
 //        Intent intent = new Intent(this, ApiIntentService.class);
 //        startService(intent);
+        //used to test the sync adapter
         SyncAdapter.syncImmediately(this);
+        //start the sync adapter to run every 10 hrs
+//        SyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override

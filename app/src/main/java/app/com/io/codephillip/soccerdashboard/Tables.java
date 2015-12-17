@@ -1,8 +1,11 @@
 package app.com.io.codephillip.soccerdashboard;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +18,7 @@ import java.util.List;
 import app.com.io.codephillip.soccerdashboard.database.Database;
 import app.com.io.codephillip.soccerdashboard.database.LeagueTable;
 
-public class Tables extends Fragment {
+public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     private String[] tableArray;
     private String[] debugTableArray = new String[]{
             "Arsenal FC","Manchester United FC","Everton FC","Watford FC", "Norwich City FC", "Swansea City FC"
@@ -94,12 +97,27 @@ public class Tables extends Fragment {
         tableArray = new String[tableArrayList.size()];
         tableArray = tableArrayList.toArray(tableArray);
 
-        adapter = new TableListAdapter(getActivity(), debugTableArray, imageUrls);
-//        adapter = new TableListAdapter(getActivity(), tableArray, null);
+//        adapter = new TableListAdapter(getActivity(), debugTableArray, imageUrls);
+        adapter = new TableListAdapter(getActivity(), tableArray, imageUrls);
         tableList.setAdapter(adapter);
 
 		return view;
 	}
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
 
 //    class FetchTableTask extends AsyncTask<String, Void, Void>{
 //

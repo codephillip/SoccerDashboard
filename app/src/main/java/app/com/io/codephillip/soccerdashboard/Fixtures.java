@@ -1,8 +1,11 @@
 package app.com.io.codephillip.soccerdashboard;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +18,7 @@ import java.util.List;
 import app.com.io.codephillip.soccerdashboard.database.Database;
 import app.com.io.codephillip.soccerdashboard.database.FixturesTable;
 
-public class Fixtures extends Fragment {
+public class Fixtures extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private ListView fixtureList;
     private String[] fixtureArray;
     private String[] awayTeamName;
@@ -112,5 +115,20 @@ public class Fixtures extends Fragment {
     public void onResume() {
         super.onResume();
         //fetchFromDatabase();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }
