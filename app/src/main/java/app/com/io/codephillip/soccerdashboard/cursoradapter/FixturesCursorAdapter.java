@@ -19,9 +19,6 @@ public class FixturesCursorAdapter extends CursorAdapter {
     private final int VIEW_TYPE_TITLE = 0;
     private final int VIEW_TYPE_BODY = 1;
     private final int VIEW_TYPE_COUNT = 2;
-    private int counter = 0;
-    private String debugName;
-    private boolean mUseTitleLayout = true;
 
     public static class ViewHolder {
         public final TextView homeTeam;
@@ -83,14 +80,15 @@ public class FixturesCursorAdapter extends CursorAdapter {
         String goalsAwayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM));
         String date = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_DATE));
         Log.d("CURSOR_bindview", homeTeam);
+        Log.d("CURSOR_bindview", awayTeam);
 
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         try {
             viewHolder.homeTeam.setText(homeTeam);
             viewHolder.awayTeam.setText(awayTeam);
-            viewHolder.goalsHomeTeam.setText(goalsHomeTeam);
-            viewHolder.goalsAwayTeam.setText(goalsAwayTeam);
+//            viewHolder.goalsHomeTeam.setText(goalsHomeTeam);
+//            viewHolder.goalsAwayTeam.setText(goalsAwayTeam);
 //            viewHolder.date.setText(date);
         } catch (Exception e){
             e.printStackTrace();

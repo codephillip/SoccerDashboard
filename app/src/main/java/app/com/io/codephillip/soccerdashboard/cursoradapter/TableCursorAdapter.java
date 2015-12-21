@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import app.com.io.codephillip.soccerdashboard.R;
+import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 /**
  * Created by codephillip on 12/21/15.
@@ -24,6 +26,23 @@ public class TableCursorAdapter extends CursorAdapter {
     };
 
     private int position;
+
+    public static class ViewHolder {
+        public final TextView teamName;
+        public final TextView points;
+//        public final TextView goals;
+//        public final TextView goalsAgainst;
+        public final TextView goalsDifference;
+
+        public ViewHolder(View view) {
+
+            teamName = (TextView) view.findViewById(R.id.teamname);
+            points = (TextView) view.findViewById(R.id.points);
+//            goals = (TextView) view.findViewById(R.id.goals);
+//            goalsAgainst = (TextView) view.findViewById(R.id.g);
+            goalsDifference = (TextView) view.findViewById(R.id.goaldifference);
+        }
+    }
 
     public TableCursorAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -47,6 +66,8 @@ public class TableCursorAdapter extends CursorAdapter {
         }
 
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setTag(viewHolder);
         return view;
     }
 
@@ -74,8 +95,20 @@ public class TableCursorAdapter extends CursorAdapter {
 //        TextView losses = (TextView) view.findViewById(R.id.losses);
 //        TextView goalDifference = (TextView) view.findViewById(R.id.goaldifference);
 //
-//        teamName.setText(cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_TEAM_NAME)));
-////        teamName.setText("hello");
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
 
+        String teamName = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_TEAM_NAME));
+        String points = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_POINTS));
+//        String goals = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS));
+//        String goalsAgainst = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS_AGAINST));
+        String goalsDifference = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE));
+
+        Log.d("CURSOR_BINDVIEW", teamName + points + goalsDifference);
+
+        try {
+            viewHolder.teamName.setText(teamName);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
