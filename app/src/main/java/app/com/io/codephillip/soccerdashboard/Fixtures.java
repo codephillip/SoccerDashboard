@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.com.io.codephillip.soccerdashboard.cursoradapter.FixturesCursorAdapter;
+import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 import app.com.io.codephillip.soccerdashboard.database.Database;
 import app.com.io.codephillip.soccerdashboard.database.FixturesTable;
 
@@ -55,17 +58,38 @@ public class Fixtures extends Fragment implements LoaderManager.LoaderCallbacks<
             "w/west-ham",
     };
 
+    private static final int LOADER_ID = 1;
+    private FixturesCursorAdapter cursorAdapter;
+
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fixtures_layout, container, false);
 
         fixtureList = (ListView) view.findViewById(R.id.lv_fixtures);
 
-        fetchFromDatabase();
+//        fetchFromDatabase();
 //        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamNameList, awayTeamNameList, scoreList, null);
-        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, awayTeamName, score, imageUrls);
+//        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, awayTeamName, score, imageUrls);
 //        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, homeTeamName, null, null, null);
-        fixtureList.setAdapter(adapter);
+        cursorAdapter = new FixturesCursorAdapter(getContext(), null, 0);
+
+//        CursorLoader cursorLoader = new CursorLoader(
+//                getContext(),
+////                allContacts,
+//                SoccerContract.LeagueTable.CONTENT_URI,
+//                null, null,null, null
+//        );
+//
+//        Cursor cursor = cursorLoader.loadInBackground();
+//
+//        if (cursor.moveToFirst()){
+//            do {
+//                String name = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_TEAM_NAME));
+//                Log.d("CURSOR######", name);
+//            }while (cursor.moveToNext());
+//        }
+
+        fixtureList.setAdapter(cursorAdapter);
 		return view;
 	}
 
@@ -108,7 +132,7 @@ public class Fixtures extends Fragment implements LoaderManager.LoaderCallbacks<
     @Override
     public void onPause() {
         super.onPause();
-        database.close();
+//        database.close();
     }
 
     @Override
@@ -118,17 +142,30 @@ public class Fixtures extends Fragment implements LoaderManager.LoaderCallbacks<
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getLoaderManager().initLoader(LOADER_ID, null, this);
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
+        Log.d("LOADER","ONCREATELOADER");
+        return new CursorLoader(
+                getContext(),
+//                allContacts,
+                SoccerContract.FixturesTable.CONTENT_URI,
+                null, null,null, null
+        );
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
+        Log.d("LOADER", "ONLOADFINISHED");
+        cursorAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        cursorAdapter.swapCursor(null);
     }
 }

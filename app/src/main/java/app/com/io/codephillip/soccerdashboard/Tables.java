@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
@@ -116,13 +115,13 @@ public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cu
 //                null, null,null, null
 //        );
 //        Cursor cursor = cursorLoader.loadInBackground();
-        cursorAdapter = new TableCursorAdapter(getContext(), null, 0);
-        Log.d("LOADER","starting cursoradapter");
-
-//        simpleCursorAdapter = new SimpleCursorAdapter(getContext(), R.layout.tables_layout, null, new String[]{"teamName"}, new int[]{R.id.teamname}, 0);
+//        cursorAdapter = new TableCursorAdapter(getContext(), null, 0);
+//        Log.d("LOADER","starting cursoradapter");
+//
+////        simpleCursorAdapter = new SimpleCursorAdapter(getContext(), R.layout.tables_layout, null, new String[]{"teamName"}, new int[]{R.id.teamname}, 0);
+////        tableList.setAdapter(cursorAdapter);
+//        ListView tableList = (ListView) view.findViewById(R.id.lv_tables);
 //        tableList.setAdapter(cursorAdapter);
-        ListView tableList = (ListView) view.findViewById(R.id.lv_tables);
-        tableList.setAdapter(cursorAdapter);
 
 		return view;
 	}
@@ -130,7 +129,7 @@ public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cu
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(LOADER_ID, null, this);
+//        getLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
     @Override

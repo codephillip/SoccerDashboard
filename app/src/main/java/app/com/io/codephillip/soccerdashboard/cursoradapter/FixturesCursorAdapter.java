@@ -1,0 +1,99 @@
+package app.com.io.codephillip.soccerdashboard.cursoradapter;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import app.com.io.codephillip.soccerdashboard.R;
+import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
+
+/**
+ * Created by codephillip on 12/21/15.
+ */
+public class FixturesCursorAdapter extends CursorAdapter {
+    private final int VIEW_TYPE_TITLE = 0;
+    private final int VIEW_TYPE_BODY = 1;
+    private final int VIEW_TYPE_COUNT = 2;
+    private int counter = 0;
+    private String debugName;
+    private boolean mUseTitleLayout = true;
+
+    public static class ViewHolder {
+        public final TextView homeTeam;
+        public final TextView awayTeam;
+        public final TextView goalsHomeTeam;
+        public final TextView goalsAwayTeam;
+        public final TextView date;
+
+        public ViewHolder(View view) {
+
+            homeTeam = (TextView) view.findViewById(R.id.homeTeam);
+            awayTeam = (TextView) view.findViewById(R.id.awayTeam);
+            goalsHomeTeam = (TextView) view.findViewById(R.id.awayTeam);
+            goalsAwayTeam = (TextView) view.findViewById(R.id.awayTeam);
+            date = (TextView) view.findViewById(R.id.awayTeam);
+        }
+    }
+
+
+    public FixturesCursorAdapter(Context context, Cursor c, int flags) {
+        super(context, c, flags);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return (position == 0)? VIEW_TYPE_TITLE : VIEW_TYPE_BODY;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return VIEW_TYPE_COUNT;
+    }
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+
+        int viewType = getItemViewType(cursor.getPosition());
+
+        int layoutId = -1;
+
+        if (viewType == VIEW_TYPE_TITLE){
+            layoutId = R.layout.table_row_title;
+        }
+        else if (viewType == VIEW_TYPE_BODY){
+            layoutId = R.layout.fixtures_table_row;
+        }
+
+        View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setTag(viewHolder);
+        return view;
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor){
+        String homeTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME));
+        String awayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME));
+        String goalsHomeTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM));
+        String goalsAwayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM));
+        String date = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_DATE));
+        Log.d("CURSOR_bindview", homeTeam);
+
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
+
+        try {
+            viewHolder.homeTeam.setText(homeTeam);
+            viewHolder.awayTeam.setText(awayTeam);
+            viewHolder.goalsHomeTeam.setText(goalsHomeTeam);
+            viewHolder.goalsAwayTeam.setText(goalsAwayTeam);
+//            viewHolder.date.setText(date);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
