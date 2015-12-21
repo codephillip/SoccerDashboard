@@ -3,11 +3,10 @@ package app.com.io.codephillip.soccerdashboard.cursoradapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import app.com.io.codephillip.soccerdashboard.R;
 
@@ -20,12 +19,19 @@ public class TableCursorAdapter extends CursorAdapter {
     private static final int VIEW_TYPE_TITLE = 0;
     private static final int VIEW_TYPE_BODY = 1;
 
+    private String[] debugTableArray = new String[]{
+            "Arsenal FC","Manchester United FC","Everton FC","Watford FC", "Norwich City FC", "Swansea City FC"
+    };
+
+    private int position;
+
     public TableCursorAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        Log.d("CURSOR", "NEWVIEW");
         int viewType = cursor.getPosition();
         int layoutId = -1;
         switch (viewType){
@@ -36,7 +42,8 @@ public class TableCursorAdapter extends CursorAdapter {
                 layoutId = R.layout.league_table_row;
                 break;
             default:
-                throw new UnsupportedOperationException("Failed to load Layout");
+//                throw new UnsupportedOperationException("Failed to load Layout"l);
+                layoutId = R.layout.league_table_row;
         }
 
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
@@ -56,16 +63,19 @@ public class TableCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        TextView teamName = (TextView) view.findViewById(R.id.teamname);
-        ImageView imageView = (ImageView) view.findViewById(R.id.icon);
-        TextView points = (TextView) view.findViewById(R.id.points);
-        TextView teamPosition = (TextView) view.findViewById(R.id.teamposition);
-        TextView playedGames = (TextView) view.findViewById(R.id.playedgames);
-        TextView wins = (TextView) view.findViewById(R.id.wins);
-        TextView draws = (TextView) view.findViewById(R.id.draws);
-        TextView losses = (TextView) view.findViewById(R.id.losses);
-        TextView goalDifference = (TextView) view.findViewById(R.id.goaldifference);
-        
+        Log.d("LOADER","BINDVIEW");
+//        TextView teamName = (TextView) view.findViewById(R.id.teamname);
+//        ImageView imageView = (ImageView) view.findViewById(R.id.icon);
+//        TextView points = (TextView) view.findViewById(R.id.points);
+//        TextView teamPosition = (TextView) view.findViewById(R.id.teamposition);
+//        TextView playedGames = (TextView) view.findViewById(R.id.playedgames);
+//        TextView wins = (TextView) view.findViewById(R.id.wins);
+//        TextView draws = (TextView) view.findViewById(R.id.draws);
+//        TextView losses = (TextView) view.findViewById(R.id.losses);
+//        TextView goalDifference = (TextView) view.findViewById(R.id.goaldifference);
+//
+//        teamName.setText(cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_TEAM_NAME)));
+////        teamName.setText("hello");
 
     }
 }

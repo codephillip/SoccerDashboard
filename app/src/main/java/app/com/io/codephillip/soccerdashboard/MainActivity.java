@@ -81,9 +81,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 //        Intent intent = new Intent(this, ApiIntentService.class);
 //        startService(intent);
         //used to test the sync adapter
-        SyncAdapter.syncImmediately(this);
+//        SyncAdapter.syncImmediately(this);
         //start the sync adapter to run every 10 hrs
-//        SyncAdapter.initializeSyncAdapter(this);
+//        testDeleteDb();
+        SyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override

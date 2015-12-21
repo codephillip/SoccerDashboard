@@ -188,8 +188,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         for (i = 0; i < 4; i++){
             Log.d("INSERT: ", "starting");
             ContentValues values = new ContentValues();
-            values.put(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME, "Chelsea FC"+String.valueOf(i));
-            values.put(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME, "Watford FC "+String.valueOf(i));
+            values.put(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME, "Chelsea FC");
+            values.put(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME, "Watford FC ");
             values.put(SoccerContract.FixturesTable.TAG_DATE, "23/4/2015 " + String.valueOf(i));
             values.put(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM, "2" + String.valueOf(i));
             values.put(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM, "1" + String.valueOf(i));
