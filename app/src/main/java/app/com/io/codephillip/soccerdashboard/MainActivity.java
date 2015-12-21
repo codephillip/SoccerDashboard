@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         for (i = 0; i < 4; i++) {
             Log.d("INSERT: ", "starting");
             ContentValues values = new ContentValues();
-            values.put(SoccerContract.LeagueTable.TAG_TEAM_NAME, "Arsenal FC");
+            values.put(SoccerContract.LeagueTable.TAG_TEAM_NAME, "Everton FC");
             values.put(SoccerContract.LeagueTable.TAG_POSITION, "3 " + String.valueOf(i));
             values.put(SoccerContract.LeagueTable.TAG_POINTS, "8 " + String.valueOf(i));
             values.put(SoccerContract.LeagueTable.TAG_GOALS, "12 " + String.valueOf(i));

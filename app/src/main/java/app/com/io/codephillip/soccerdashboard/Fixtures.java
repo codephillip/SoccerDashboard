@@ -63,7 +63,7 @@ public class Fixtures extends Fragment implements LoaderManager.LoaderCallbacks<
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        getLoaderManager().initLoader(LOADER_ID, null, this);
+        getLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
     @Override
