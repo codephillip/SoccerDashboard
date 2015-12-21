@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:text="            TEAM                                      GP  W   G  GA  GD    P"
         android:paddingLeft="16dp"
+        android:textStyle="bold"
         android:id="@+id/model"/>
 
 
