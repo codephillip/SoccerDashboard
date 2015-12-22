@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
+import app.com.io.codephillip.soccerdashboard.sync.SyncAdapter;
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
     private TabsPagerAdapter pageAdapter;
@@ -76,10 +77,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         }
 
 
-//        SyncAdapter.initializeSyncAdapter(this);
+        SyncAdapter.initializeSyncAdapter(this);
 //        SyncAdapter.syncImmediately(this);
-        storeInFixtureTable();
-        storeInLeagueTable();
+//        storeInFixtureTable();
+//        storeInLeagueTable();
     }
 
     @Override

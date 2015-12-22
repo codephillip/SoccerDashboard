@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import app.com.io.codephillip.soccerdashboard.R;
+import app.com.io.codephillip.soccerdashboard.Utility;
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 /**
@@ -48,24 +49,20 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         Log.d("SYNCADAPTER", "ONPERFORMSYNC");
-//        notifyWeather();
 
-//        try {
-//            int k;
-//            for (k=0; k<2 ; k++){
-//                if (k == 0){
-//                    getTableDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLTableUrl));
-//                } else if (k == 1) {
-//                    getFixtureDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLFixturesUrl));
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Log.d("URL BUG", e.toString());
-//        }
-
-//        storeInFixtureTable(null,null,null,null,null,null);
-//        storeInLeagueTable(null,null,null,null,null,null);
+        try {
+            int k;
+            for (k=0; k<2 ; k++){
+                if (k == 0){
+                    getTableDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLTableUrl));
+                } else if (k == 1) {
+                    getFixtureDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLFixturesUrl));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("URL BUG", e.toString());
+        }
     }
 
     private Void getTableDataJson(String jsonData) throws JSONException {

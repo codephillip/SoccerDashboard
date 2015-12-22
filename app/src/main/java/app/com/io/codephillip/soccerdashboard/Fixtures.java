@@ -17,38 +17,13 @@ import app.com.io.codephillip.soccerdashboard.cursoradapter.FixturesCursorAdapte
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 public class Fixtures extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    private ListView fixtureList;
-    private final String imageUrls[] = {
-            "a/arsenal",
-            "a/aston-villa",
-            "b/bournemouth",
-            "c/chelsea",
-            "c/crystal-palace",
-            "e/everton",
-            "l/leicester",
-            "l/liverpool",
-            "m/man-city",
-            "m/man-utd",
-            "n/newcastle",
-            "n/norwich",
-            "s/southampton",
-            "s/stoke",
-            "s/sunderland",
-            "s/swansea",
-            "s/spurs",
-            "w/watford",
-            "w/west-brom",
-            "w/west-ham",
-    };
-
     private static final int LOADER_ID = 1;
     private FixturesCursorAdapter cursorAdapter;
 
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fixtures_layout, container, false);
-
-        fixtureList = (ListView) view.findViewById(R.id.lv_fixtures);
+        ListView fixtureList = (ListView) view.findViewById(R.id.lv_fixtures);
         cursorAdapter = new FixturesCursorAdapter(getContext(), null, 0);
         fixtureList.setAdapter(cursorAdapter);
 		return view;
