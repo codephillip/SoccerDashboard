@@ -29,8 +29,8 @@ public class Predictions extends Fragment implements LoaderManager.LoaderCallbac
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 //                android.R.layout.simple_list_item_1, android.R.id.text1, predictionArray
 //                );
-        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, predictionArray, null, null, null);
-        predictionList.setAdapter(adapter);
+//        FixturesListAdapter adapter = new FixturesListAdapter(getActivity(), null, predictionArray, null, null, null);
+//        predictionList.setAdapter(adapter);
 
 		return view;
 	}

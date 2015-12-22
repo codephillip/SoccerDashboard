@@ -2,16 +2,25 @@ package app.com.io.codephillip.soccerdashboard.sync;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.SyncRequest;
 import android.content.SyncResult;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.CursorLoader;
 import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -22,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import app.com.io.codephillip.soccerdashboard.MainActivity;
 import app.com.io.codephillip.soccerdashboard.R;
 import app.com.io.codephillip.soccerdashboard.Utility;
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
@@ -39,7 +49,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 //    public static final int SYNC_INTERVAL = 15 * 1;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL / 3;
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
-    private static final int WEATHER_NOTIFICATION_ID = 3004;
+    private static final int SOCCER_NOTIFICATION_ID = 3004;
     private final String TAG = SyncAdapter.class.getSimpleName();
 
     public SyncAdapter(Context context, boolean autoInitialize) {
@@ -59,6 +69,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                     getFixtureDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLFixturesUrl));
                 }
             }
+//            notifyWeather();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("URL BUG", e.toString());
@@ -273,78 +284,86 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public static void initializeSyncAdapter(Context context) {
         getSyncAccount(context);
-//        notifyWeather();
     }
 
-//    private void notifyWeather() {
+    public static void notifyWeather(Context context) {
 //        Context context = getContext();
-//        //checking the last update and notify if it' the first of the day
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-//        String lastNotificationKey = context.getString(R.string.pref_last_notification);
-//        long lastSync = prefs.getLong(lastNotificationKey, 0);
-//
+        //checking the last update and notify if it' the first of the day
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String lastNotificationKey = context.getString(R.string.pref_last_notification);
+        long lastSync = prefs.getLong(lastNotificationKey, 0);
+
+        if (true) {
 //        if (System.currentTimeMillis() - lastSync >= DAY_IN_MILLIS) {
-//            // Last sync was more than 1 day ago, let's send a notification with the weather.
+            // Last sync was more than 1 day ago, let's send a notification with the weather.
 //            String locationQuery = Utility.getPreferredLocation(context);
-//
+
 //            Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(locationQuery, System.currentTimeMillis());
-//
-//            // we'll query our contentProvider, as always
+
+            // we'll query our contentProvider, as always
 //            Cursor cursor = context.getContentResolver().query(weatherUri, NOTIFY_WEATHER_PROJECTION, null, null, null);
+            CursorLoader cursorLoader = new CursorLoader(context,SoccerContract.FixturesTable.CONTENT_URI, null, null, null, null);
+//            Cursor cursor = context.getContentResolver().query(SoccerContract.LeagueTable.CONTENT_URI, null, null, null, null);
+            Cursor cursor = cursorLoader.loadInBackground();
 //
-//            if (cursor.moveToFirst()) {
-//                int weatherId = cursor.getInt(INDEX_WEATHER_ID);
-//                double high = cursor.getDouble(INDEX_MAX_TEMP);
-//                double low = cursor.getDouble(INDEX_MIN_TEMP);
-//                String desc = cursor.getString(INDEX_SHORT_DESC);
-//
-//                int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
-//                String title = context.getString(R.string.app_name);
-//
-//                // Define the text of the forecast.
+            if (cursor.moveToFirst()) {
+                String homeTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME));
+                String awayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME));
+                String goalsHomeTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM));
+                String goalsAwayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM));
+                String date = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_DATE));
+                Log.d("CURSOR_bindview", homeTeam);
+                Log.d("CURSOR_bindview", awayTeam);
+                int iconId = R.mipmap.ic_launcher;
+                String title = context.getString(R.string.app_name);
+
+                // Define the text of the forecast.
 //                String contentText = String.format(context.getString(R.string.format_notification),
 //                        desc,
 //                        Utility.formatTemperature(context, high),
 //                        Utility.formatTemperature(context, low));
-//
-//                // NotificationCompatBuilder is a very convenient way to build backward-compatible
-//                // notifications.  Just throw in some data.
-//                NotificationCompat.Builder mBuilder =
+//                String contentText = homeTeam + "VS "+ awayTeam + " at "+ date;
+                String contentText = "notification";
+
+                // NotificationCompatBuilder is a very convenient way to build backward-compatible
+                // notifications.  Just throw in some data.
+                NotificationCompat.Builder mBuilder =
 //                        new NotificationCompat.Builder(getContext())
-//                                .setSmallIcon(iconId)
-//                                .setContentTitle(title)
-//                                .setContentText(contentText);
-//
-//                // Make something interesting happen when the user clicks on the notification.
-//                // In this case, opening the app is sufficient.
-//                Intent resultIntent = new Intent(context, MainActivity.class);
-//
-//                // The stack builder object will contain an artificial back stack for the
-//                // started Activity.
-//                // This ensures that navigating backward from the Activity leads out of
-//                // your application to the Home screen.
-//                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-//                stackBuilder.addNextIntent(resultIntent);
-//                PendingIntent resultPendingIntent =
-//                        stackBuilder.getPendingIntent(
-//                                0,
-//                                PendingIntent.FLAG_UPDATE_CURRENT
-//                        );
-//                mBuilder.setContentIntent(resultPendingIntent);
-//
-//                NotificationManager mNotificationManager =
-//                        (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-//                // WEATHER_NOTIFICATION_ID allows you to update the notification later on.
-//                mNotificationManager.notify(WEATHER_NOTIFICATION_ID, mBuilder.build());
-//
-//
-//                //refreshing last sync
-//                SharedPreferences.Editor editor = prefs.edit();
-//                editor.putLong(lastNotificationKey, System.currentTimeMillis());
-//                editor.commit();
-//            }
-//        }
-//    }
+                        new NotificationCompat.Builder(context)
+                                .setSmallIcon(iconId)
+                                .setContentTitle(title)
+                                .setContentText(contentText);
+
+                // Make something interesting happen when the user clicks on the notification.
+                // In this case, opening the app is sufficient.
+                Intent resultIntent = new Intent(context, MainActivity.class);
+
+                // The stack builder object will contain an artificial back stack for the
+                // started Activity.
+                // This ensures that navigating backward from the Activity leads out of
+                // your application to the Home screen.
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+
+                NotificationManager mNotificationManager =
+                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                // WEATHER_NOTIFICATION_ID allows you to update the notification later on.
+                mNotificationManager.notify(SOCCER_NOTIFICATION_ID, mBuilder.build());
+
+
+                //refreshing last sync
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putLong(lastNotificationKey, System.currentTimeMillis());
+                editor.commit();
+            }
+        }
+    }
 
 }
 
