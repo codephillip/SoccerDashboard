@@ -32,7 +32,6 @@ import org.json.JSONObject;
 
 import app.com.io.codephillip.soccerdashboard.MainActivity;
 import app.com.io.codephillip.soccerdashboard.R;
-import app.com.io.codephillip.soccerdashboard.Utility;
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 /**
@@ -50,6 +49,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
     private static final int SOCCER_NOTIFICATION_ID = 3004;
     private final String TAG = SyncAdapter.class.getSimpleName();
+    private String[] fixturesUrl;
+    private String[] TableUrl;
 
     public SyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -60,23 +61,48 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         Log.d("SYNCADAPTER", "ONPERFORMSYNC");
 
         notifyWeather();
-        try {
-            int k;
-            for (k=0; k<2 ; k++){
-                if (k == 0){
-                    getTableDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLTableUrl));
-                } else if (k == 1) {
-                    getFixtureDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLFixturesUrl));
-                }
-            }
-            notifyWeather();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d("URL BUG", e.toString());
-        }
+//        try {
+//            int k;
+//            for (k=0; k<2 ; k++){
+//                if (k == 0){
+//                    getTableDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLTableUrl));
+//                } else if (k == 1) {
+//                    getFixtureDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLFixturesUrl));
+//                }
+//            }
+//            notifyWeather();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.d("URL BUG", e.toString());
+//        }
+
+//        try {
+//            int k, n;
+//            //TODO replace with root api
+//            getUrlsFromJson(connectToServer("http://api.football-data.org/alpha/soccerseasons/398/leagueTable"));
+//            for (k=0; k<2 ; k++){
+//                if (k == 0){
+//                    for (n=0; n<6 ; n++){
+//                        getTableDataJson(connectToServer(TableUrl[n]), n);
+//                    }
+//                } else if (k == 1) {
+//                    for (n=0; n<6 ; n++) {
+//                        getFixtureDataJson(connectToServer(fixturesUrl[n]), n);
+//                    }
+//                }
+//            }
+//            notifyWeather();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.d("URL BUG", e.toString());
+//        }
     }
 
-    private Void getTableDataJson(String jsonData) throws JSONException {
+    private void getUrlsFromJson(String s) {
+
+    }
+
+    private Void getTableDataJson(String jsonData, int leagueNo) throws JSONException {
         final String TAG_STANDING = "standing";
         final String TAG_POSITION = "position";
         final String TAG_TEAM_NAME = "teamName";
@@ -84,6 +110,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         final String TAG_GOALS = "goals";
         final String TAG_GOALS_AGAINST = "goalsAgainst";
         final String TAG_GOALS_DIFFERENCE = "goalDifference";
+        final String TAG_GAMES_PLAYED = "playedGames";
 
         String position;
         String teamName;
@@ -92,8 +119,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         String values;
         String goalsAgainst;
         String goalDifference;
-        String standings;
-
+        String gamesPlayed;
         JSONObject jsonObject = new JSONObject(jsonData);
         JSONArray jsonArray = jsonObject.getJSONArray(TAG_STANDING);
 
@@ -109,16 +135,17 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             goals = innerObject.getString(TAG_GOALS);
             goalsAgainst = innerObject.getString(TAG_GOALS_AGAINST);
             goalDifference = innerObject.getString(TAG_GOALS_DIFFERENCE);
+            gamesPlayed = innerObject.getString(TAG_GAMES_PLAYED);
 
             values = teamName+" "+position+" "+points+" "+goals;
             Log.d("JSONRESULT", values);
 
-            storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference, 0);
+            storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference, gamesPlayed, leagueNo);
         }
         return null;
     }
 
-    private void getFixtureDataJson(String jsonData) throws JSONException{
+    private void getFixtureDataJson(String jsonData, int leagueNo) throws JSONException{
         final String TAG_DATE = "date";
         final String TAG_STATUS = "status";
         final String TAG_HOME_TEAM_NAME = "homeTeamName";
@@ -134,7 +161,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         String awayTeamName;
         String goalsHomeTeam;
         String goalsAwayTeam;
-        String values;
 
         JSONObject jsonObject = new JSONObject(jsonData);
         JSONArray jsonArray = jsonObject.getJSONArray(TAG_FIXTURES);
@@ -152,7 +178,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             goalsAwayTeam = resultObject.getString(TAG_GOALS_AWAY_TEAM);
 
             Log.d(TAG, date +"#"+ status +"#"+ homeTeamName +"#"+ awayTeamName +"#"+ goalsAwayTeam +"#"+ goalsAwayTeam);
-            storeInFixtureTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam, 0);
+            storeInFixtureTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam, leagueNo);
         }
     }
 
@@ -166,7 +192,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         return jsonData;
     }
 
-    private void storeInLeagueTable(String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference, int leagueNo){
+    private void storeInLeagueTable(String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference, String gamesPlayed, int leagueNo){
             Log.d("INSERT: ","starting");
             ContentValues values = new ContentValues();
             values.put(SoccerContract.LeagueTable.TAG_TEAM_NAME, teamName);
@@ -175,8 +201,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             values.put(SoccerContract.LeagueTable.TAG_GOALS, goals);
             values.put(SoccerContract.LeagueTable.TAG_GOALS_AGAINST,goalsAgainst);
             values.put(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE, goalsDifference);
+            values.put(SoccerContract.LeagueTable.TAG_GAMES_PLAYED, gamesPlayed);
             values.put(SoccerContract.FixturesTable.TAG_LEAGUE_NO, String.valueOf(leagueNo));
-        Uri uri = getContext().getContentResolver().insert(SoccerContract.LeagueTable.CONTENT_URI, values);
+            Uri uri = getContext().getContentResolver().insert(SoccerContract.LeagueTable.CONTENT_URI, values);
             Log.d("INSERT: ", "inserting"+uri.toString());
 
     }
