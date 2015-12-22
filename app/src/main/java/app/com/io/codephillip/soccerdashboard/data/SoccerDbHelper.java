@@ -20,11 +20,14 @@ public class SoccerDbHelper extends SQLiteOpenHelper {
             SoccerContract.LeagueTable.TAG_TEAM_NAME + " TINYTEXT,"+
             SoccerContract.LeagueTable.TAG_POINTS + " TINYTEXT,"+
             SoccerContract.LeagueTable.TAG_GOALS + " TINYTEXT,"+
+            SoccerContract.LeagueTable.TAG_LEAGUE_NO + " TINYTEXT,"+
+            SoccerContract.LeagueTable.TAG_GAMES_PLAYED + " TINYTENT,"+
             SoccerContract.LeagueTable.TAG_GOALS_AGAINST + " TINYTEXT,"+
             SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE + " TINYTEXT"+ ")";
     private static final String CREATE_FIXUTERES_TABLE = "CREATE TABLE " + SoccerContract.FixturesTable.FIXTURES_TABLE + "(" + SoccerContract.FixturesTable._ID
             +" INTEGER PRIMARY KEY," + SoccerContract.FixturesTable.TAG_DATE +" TINYTEXT,"+
             SoccerContract.FixturesTable.TAG_STATUS +" TINYTEXT,"+
+            SoccerContract.FixturesTable.TAG_LEAGUE_NO + " TINYTEXT,"+
             SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME +" TINYTEXT,"+
             SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME +" TINYTEXT,"+
             SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM

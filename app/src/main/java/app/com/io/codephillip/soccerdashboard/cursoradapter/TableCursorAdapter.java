@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import app.com.io.codephillip.soccerdashboard.R;
+import app.com.io.codephillip.soccerdashboard.Utility;
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 /**
@@ -24,17 +26,21 @@ public class TableCursorAdapter extends CursorAdapter {
     public static class ViewHolder {
         public final TextView teamName;
         public final TextView points;
-//        public final TextView goals;
-//        public final TextView goalsAgainst;
+        public final ImageView teamImage;
+        public final TextView position;
+        public final TextView goals;
+        public final TextView goalsAgainst;
         public final TextView goalsDifference;
 
         public ViewHolder(View view) {
 
             teamName = (TextView) view.findViewById(R.id.teamname);
             points = (TextView) view.findViewById(R.id.points);
-//            goals = (TextView) view.findViewById(R.id.goals);
-//            goalsAgainst = (TextView) view.findViewById(R.id.g);
+            teamImage = (ImageView) view.findViewById(R.id.teamImage);
+            goals = (TextView) view.findViewById(R.id.goals);
+            goalsAgainst = (TextView) view.findViewById(R.id.goalsAgainst);
             goalsDifference = (TextView) view.findViewById(R.id.goaldifference);
+            position = (TextView) view.findViewById(R.id.teamposition);
         }
     }
 
@@ -84,13 +90,20 @@ public class TableCursorAdapter extends CursorAdapter {
         String goals = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS));
         String goalsAgainst = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS_AGAINST));
         String goalsDifference = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE));
+        String position = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_POSITION));
 
         Log.d("CURSOR_BINDVIEW", teamName + points + goalsDifference);
 
         try {
             viewHolder.teamName.setText(teamName);
             viewHolder.points.setText(points);
+            viewHolder.goals.setText(goals);
+            viewHolder.position.setText(position);
+            viewHolder.goalsAgainst.setText(goalsAgainst);
             viewHolder.goalsDifference.setText(goalsDifference);
+            if (viewHolder.teamImage != null && teamName != null) {
+                Utility.picassoLoader(context, 0, viewHolder.teamImage, teamName);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

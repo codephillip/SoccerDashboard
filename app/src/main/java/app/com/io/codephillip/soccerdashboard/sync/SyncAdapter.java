@@ -113,7 +113,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             values = teamName+" "+position+" "+points+" "+goals;
             Log.d("JSONRESULT", values);
 
-            storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference);
+            storeInLeagueTable(position, teamName, points, goals, goalsAgainst, goalDifference, 0);
         }
         return null;
     }
@@ -152,7 +152,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             goalsAwayTeam = resultObject.getString(TAG_GOALS_AWAY_TEAM);
 
             Log.d(TAG, date +"#"+ status +"#"+ homeTeamName +"#"+ awayTeamName +"#"+ goalsAwayTeam +"#"+ goalsAwayTeam);
-            storeInFixtureTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam);
+            storeInFixtureTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam, 0);
         }
     }
 
@@ -166,7 +166,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         return jsonData;
     }
 
-    private void storeInLeagueTable(String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference){
+    private void storeInLeagueTable(String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference, int leagueNo){
             Log.d("INSERT: ","starting");
             ContentValues values = new ContentValues();
             values.put(SoccerContract.LeagueTable.TAG_TEAM_NAME, teamName);
@@ -175,13 +175,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             values.put(SoccerContract.LeagueTable.TAG_GOALS, goals);
             values.put(SoccerContract.LeagueTable.TAG_GOALS_AGAINST,goalsAgainst);
             values.put(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE, goalsDifference);
-            Uri uri = getContext().getContentResolver().insert(SoccerContract.LeagueTable.CONTENT_URI, values);
+            values.put(SoccerContract.FixturesTable.TAG_LEAGUE_NO, String.valueOf(leagueNo));
+        Uri uri = getContext().getContentResolver().insert(SoccerContract.LeagueTable.CONTENT_URI, values);
             Log.d("INSERT: ", "inserting"+uri.toString());
 
     }
 
-    private void storeInFixtureTable(String date, String status, String homeTeamName, String awayTeamName, String goalsHomeTeam, String goalsAwayTeam){
-            Log.d("INSERT: ","starting");
+    private void storeInFixtureTable(String date, String status, String homeTeamName, String awayTeamName, String goalsHomeTeam, String goalsAwayTeam, int leagueNo){
+            Log.d("INSERT: ", "starting");
             ContentValues values = new ContentValues();
             values.put(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME, homeTeamName);
             values.put(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME, awayTeamName);
@@ -189,6 +190,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             values.put(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM, goalsHomeTeam);
             values.put(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM, goalsAwayTeam);
             values.put(SoccerContract.FixturesTable.TAG_STATUS, status);
+            values.put(SoccerContract.FixturesTable.TAG_LEAGUE_NO, String.valueOf(leagueNo));
             Uri uri = getContext().getContentResolver().insert(SoccerContract.FixturesTable.CONTENT_URI, values);
             Log.d("INSERT: ", "inserting"+uri.toString());
     }

@@ -21,6 +21,7 @@ public class SoccerContract {
         //fixtures columns
         public static final String TAG_DATE = "date";
         public static final String TAG_STATUS = "status";
+        public static final String TAG_LEAGUE_NO = "leagueNo";
         public static final String TAG_HOME_TEAM_NAME = "homeTeamName";
         public static final String TAG_AWAY_TEAM_NAME = "awayTeamName";
         public static final String TAG_GOALS_HOME_TEAM = "goalsHomeTeam";
@@ -45,6 +46,8 @@ public class SoccerContract {
         public static final String TAG_POSITION = "position";
         public static final String TAG_TEAM_NAME = "teamName";
         public static final String TAG_POINTS = "points";
+        public static final String TAG_GAMES_PLAYED = "gamesPlayed";
+        public static final String TAG_LEAGUE_NO = "leagueNo";
         public static final String TAG_GOALS = "goals";
         public static final String TAG_GOALS_AGAINST = "goalsAgainst";
         public static final String TAG_GOALS_DIFFERENCE = "goalsDifference";
