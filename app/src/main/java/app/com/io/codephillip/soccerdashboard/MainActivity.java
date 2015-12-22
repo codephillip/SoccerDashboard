@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 //        storeInFixtureTable();
 
 //        SyncAdapter.notifyWeather(this);
-//        SyncAdapter.initializeSyncAdapter(this);
-        SyncAdapter.syncImmediately(this);
+        SyncAdapter.initializeSyncAdapter(this);
+//        SyncAdapter.syncImmediately(this);
 //        storeInLeagueTable();
     }
 

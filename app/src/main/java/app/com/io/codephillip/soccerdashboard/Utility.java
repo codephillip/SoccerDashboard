@@ -143,4 +143,18 @@ public class Utility {
                 .error(R.mipmap.ic_launcher)
                 .into(imageView);
     }
+
+    public static String timeTruncate(String date){// truncate
+//        "2014-09-13T14:00:00Z"
+        return date.substring(11, 16);
+    }
+
+    public static String dateTruncate(String date){
+//        "2014-09-13T14:00:00Z"
+        return date.substring(0, 10);
+    }
+
+    public static String teamNameTruncate(String teamName){
+        return null;
+    }
 }
