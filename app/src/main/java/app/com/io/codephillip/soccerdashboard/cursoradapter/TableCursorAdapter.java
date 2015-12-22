@@ -21,12 +21,6 @@ public class TableCursorAdapter extends CursorAdapter {
     private static final int VIEW_TYPE_TITLE = 0;
     private static final int VIEW_TYPE_BODY = 1;
 
-    private String[] debugTableArray = new String[]{
-            "Arsenal FC","Manchester United FC","Everton FC","Watford FC", "Norwich City FC", "Swansea City FC"
-    };
-
-    private int position;
-
     public static class ViewHolder {
         public final TextView teamName;
         public final TextView points;
@@ -83,20 +77,8 @@ public class TableCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
         Log.d("LOADER","BINDVIEW");
-//        TextView teamName = (TextView) view.findViewById(R.id.teamname);
-//        ImageView imageView = (ImageView) view.findViewById(R.id.icon);
-//        TextView points = (TextView) view.findViewById(R.id.points);
-//        TextView teamPosition = (TextView) view.findViewById(R.id.teamposition);
-//        TextView playedGames = (TextView) view.findViewById(R.id.playedgames);
-//        TextView wins = (TextView) view.findViewById(R.id.wins);
-//        TextView draws = (TextView) view.findViewById(R.id.draws);
-//        TextView losses = (TextView) view.findViewById(R.id.losses);
-//        TextView goalDifference = (TextView) view.findViewById(R.id.goaldifference);
-//
         ViewHolder viewHolder = (ViewHolder) view.getTag();
-
         String teamName = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_TEAM_NAME));
         String points = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_POINTS));
         String goals = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS));

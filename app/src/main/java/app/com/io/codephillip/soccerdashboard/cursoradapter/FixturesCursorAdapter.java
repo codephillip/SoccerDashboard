@@ -7,31 +7,41 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import app.com.io.codephillip.soccerdashboard.R;
+import app.com.io.codephillip.soccerdashboard.Utility;
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 /**
  * Created by codephillip on 12/21/15.
  */
 public class FixturesCursorAdapter extends CursorAdapter {
+    private static final String TAG = "CURSORLOADER";
     private final int VIEW_TYPE_TITLE = 0;
     private final int VIEW_TYPE_BODY = 1;
     private final int VIEW_TYPE_COUNT = 2;
+    private String itemname;
+    private int n = 0;
+    private ImageView imageView;
 
     public static class ViewHolder {
         public final TextView homeTeam;
         public final TextView awayTeam;
         public final TextView score;
         public final TextView date;
+        public final ImageView homeImage;
+        public final ImageView awayImage;
 
         public ViewHolder(View view) {
 
             homeTeam = (TextView) view.findViewById(R.id.homeTeam);
             awayTeam = (TextView) view.findViewById(R.id.awayTeam);
             score = (TextView) view.findViewById(R.id.score);
-            date = (TextView) view.findViewById(R.id.awayTeam);
+            date = (TextView) view.findViewById(R.id.date);
+            homeImage = (ImageView) view.findViewById(R.id.homeTeamImage);
+            awayImage = (ImageView) view.findViewById(R.id.awayImageTeam);
         }
     }
 
@@ -85,10 +95,29 @@ public class FixturesCursorAdapter extends CursorAdapter {
         try {
             viewHolder.homeTeam.setText(homeTeam);
             viewHolder.awayTeam.setText(awayTeam);
-            viewHolder.score.setText(goalsHomeTeam +" - "+ goalsAwayTeam);
+            viewHolder.score.setText(goalsHomeTeam + " - " + goalsAwayTeam);
 //            viewHolder.date.setText(date);
-        } catch (Exception e){
+            viewHolder.homeTeam.setText(homeTeam);
+            viewHolder.awayTeam.setText(awayTeam);
+
+            Log.d("PicassoLoader", "initiating" + n);
+            for (n = 0; n < 2; n++) {
+                Log.d("PicassoLoader", "started" + n);
+                if (n == 0) {
+                    itemname = homeTeam;
+                    imageView = viewHolder.homeImage;
+                } else {
+                    itemname = awayTeam;
+                    imageView = viewHolder.awayImage;
+                }
+
+                if (imageView != null && itemname != null) {
+                    Utility.picassoLoader(context, 0, imageView, itemname);
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

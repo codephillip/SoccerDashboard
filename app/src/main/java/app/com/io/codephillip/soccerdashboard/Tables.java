@@ -17,7 +17,6 @@ import android.widget.ListView;
 
 import app.com.io.codephillip.soccerdashboard.cursoradapter.TableCursorAdapter;
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
-import app.com.io.codephillip.soccerdashboard.database.Database;
 
 public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private String[] debugTableArray = new String[]{
@@ -45,15 +44,10 @@ public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cu
             "w/west-brom",
             "w/west-ham",
     };
-    private Database database = null;
     private final String TAG = Tables.class.getSimpleName();
     private TableCursorAdapter cursorAdapter;
     private static final int LOADER_ID = 1;
 
-    public void onPause() {
-        super.onPause();
-        database.close();
-    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
