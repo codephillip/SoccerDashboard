@@ -96,9 +96,7 @@ public class FixturesCursorAdapter extends CursorAdapter {
             viewHolder.homeTeam.setText(homeTeam);
             viewHolder.awayTeam.setText(awayTeam);
             viewHolder.score.setText(goalsHomeTeam + " - " + goalsAwayTeam);
-//            viewHolder.date.setText(date);
-            viewHolder.homeTeam.setText(homeTeam);
-            viewHolder.awayTeam.setText(awayTeam);
+            viewHolder.date.setText(Utility.timeTruncate(date));
 
             Log.d("PicassoLoader", "initiating" + n);
             for (n = 0; n < 2; n++) {
