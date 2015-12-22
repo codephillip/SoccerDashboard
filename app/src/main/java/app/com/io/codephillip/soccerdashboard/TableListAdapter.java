@@ -121,7 +121,7 @@ public class TableListAdapter extends ArrayAdapter<String> {
 //            if (itemname[position].equals("Manchester City FC")) {
 //                Log.d("string$$$###", "comparison true");
 //                Picasso.with(context)
-//                        .load(imageBaseUrl+imgId[0])
+//                        .load(barclaysImageBaseUrl+imgId[0])
 //                                //.resize(30,30)
 //                        .placeholder(R.drawable.com_facebook_button_icon)
 //                        .error(R.drawable.com_facebook_tooltip_black_xout)

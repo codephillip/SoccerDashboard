@@ -21,7 +21,7 @@ public class FixturesListAdapter extends ArrayAdapter<String> {
     private String[] score;
     private String[] imgId;
     private final Activity context;
-//    final String imageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
+//    final String barclaysImageBaseUrl = "http://img.uefa.com/imgml/TP/teams/logos/50x50/";
     String TAG = FixturesListAdapter.class.getSimpleName();
     final String imageBaseUrl = "http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/";
     final String endUrl = "/logo.png/_jcr_content/renditions/cq5dam.thumbnail.55.55.png";

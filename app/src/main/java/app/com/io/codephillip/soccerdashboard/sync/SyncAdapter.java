@@ -54,9 +54,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 //            int k;
 //            for (k=0; k<2 ; k++){
 //                if (k == 0){
-//                    getTableDataJson(connectToServer(Utility.SoccerVaribles.BarclaysPLTableUrl));
+//                    getTableDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLTableUrl));
 //                } else if (k == 1) {
-//                    getFixtureDataJson(connectToServer(Utility.SoccerVaribles.BarclaysPLFixturesUrl));
+//                    getFixtureDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLFixturesUrl));
 //                }
 //            }
 //        } catch (Exception e) {

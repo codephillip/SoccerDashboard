@@ -11,18 +11,22 @@ import com.squareup.picasso.Picasso;
  */
 public class Utility {
     static String TAG = "PICASSO_LOADER";
+    public static String BarclaysPLTableUrl = "http://api.football-data.org/alpha/soccerseasons/398/leagueTable";
 
-    public interface SoccerVaribles{
+    public interface SoccerUrls {
         //team  data urls
         String BarclaysPLTableUrl = "http://api.football-data.org/alpha/soccerseasons/398/leagueTable";
         String BarclaysPLFixturesUrl = "http://api.football-data.org/alpha/soccerseasons/398/fixtures";
 
 
         //team logos
-        String imageBaseUrl = "http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/";
-        String endUrl = "/logo.png/_jcr_content/renditions/cq5dam.thumbnail.55.55.png";
+        String barclaysImageBaseUrl = "http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/";
+        String barclasyEndUrl = "/logo.png/_jcr_content/renditions/cq5dam.thumbnail.55.55.png";
+       
+    }
 
-        final String imageUrls[] = {
+    public interface ImageUrls{
+        final String barclaysImageUrls[] = {
                 "a/arsenal",
                 "a/aston-villa",
                 "b/bournemouth",
@@ -61,66 +65,67 @@ public class Utility {
             case 0:{
                 switch (teamName) {
                     case "Manchester City FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[8] + SoccerVaribles.endUrl;
+                        String id = BarclaysPLTableUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[8] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Arsenal FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[0] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[0] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Manchester United FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[9] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[9] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Crystal Palace FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[4] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[4] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Leicester City FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[6] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[6] + SoccerUrls.barclasyEndUrl;
 
                         break;
                     case "West Ham United FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[19] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[19] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Everton FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[5] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[5] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Tottenham Hotspur FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[16] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[16] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Southampton FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[12] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[12] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Liverpool FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[7] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[7] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Swansea City FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[15] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[15] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Watford FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[17] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[17] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Norwich City FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[11] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[11] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Stoke City FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[13] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[13] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "AFC Bournemouth":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[2] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[2] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Chelsea FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[3] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[3] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "West Bromwich Albion FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[18] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[18] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Aston Villa FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[1] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[1] + SoccerUrls.barclasyEndUrl;
 
                         break;
                     case "Sunderland AFC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[14] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[14] + SoccerUrls.barclasyEndUrl;
                         break;
                     case "Newcastle United FC":
-                        url = SoccerVaribles.imageBaseUrl + SoccerVaribles.imageUrls[10] + SoccerVaribles.endUrl;
+                        url = SoccerUrls.barclaysImageBaseUrl + ImageUrls.barclaysImageUrls[10] + SoccerUrls.barclasyEndUrl;
                         break;
                     default:
                         Log.d(TAG + "####", "Flag not found");
