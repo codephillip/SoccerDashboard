@@ -99,14 +99,16 @@ public class TableCursorAdapter extends CursorAdapter {
 
         String teamName = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_TEAM_NAME));
         String points = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_POINTS));
-//        String goals = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS));
-//        String goalsAgainst = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS_AGAINST));
+        String goals = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS));
+        String goalsAgainst = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS_AGAINST));
         String goalsDifference = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE));
 
         Log.d("CURSOR_BINDVIEW", teamName + points + goalsDifference);
 
         try {
             viewHolder.teamName.setText(teamName);
+            viewHolder.points.setText(points);
+            viewHolder.goalsDifference.setText(goalsDifference);
         }catch (Exception e){
             e.printStackTrace();
         }

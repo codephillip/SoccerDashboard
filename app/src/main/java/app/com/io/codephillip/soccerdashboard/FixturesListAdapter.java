@@ -17,9 +17,6 @@ import com.squareup.picasso.Picasso;
 public class FixturesListAdapter extends ArrayAdapter<String> {
     private String[] date;
     private String[] homeTeamName;
-//            {
-//            "Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace","Man-U","Chelsea","Arsenal","Spurs","Leicester City", "Liverpool FC", "Crystal Palace"
-//    };
     private String[] awayTeamName;
     private String[] score;
     private String[] imgId;
@@ -152,9 +149,6 @@ public class FixturesListAdapter extends ArrayAdapter<String> {
             }}
 //            dateView.setText(date[position]);
             scoreView.setText(score[position]);
-//            //homeImageView.setImageResource(homeImage[position]);
-//            picassoLoader(imageBaseUrl+imgId[position], homeImageView);
-//            picassoLoader(imageBaseUrl+imgId[position], awayImageView);
         }catch (Exception e){
             e.printStackTrace();
         }

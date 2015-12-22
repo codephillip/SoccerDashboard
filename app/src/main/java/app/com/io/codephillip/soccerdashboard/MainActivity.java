@@ -75,17 +75,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     .setTabListener(this));
         }
 
-//        ApiIntentService apiIntentService = new ApiIntentService();
-//        apiIntentService.startS
-//        Intent intent = new Intent(this, ApiIntentService.class);
-//        startService(intent);
-        //used to test the sync adapter
-//        SyncAdapter.syncImmediately(this);
-        //start the sync adapter to run every 10 hrs
-//        testDeleteDb();
+
 //        SyncAdapter.initializeSyncAdapter(this);
-//        storeInFixtureTable(null,null,null,null,null,null);
-        storeInLeagueTable(null,null,null,null,null,null);
+//        SyncAdapter.syncImmediately(this);
+        storeInFixtureTable();
+        storeInLeagueTable();
     }
 
     @Override
@@ -197,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Log.d("CONTENT_DELETE: ", String.valueOf(rowsDeleted));
     }
 
-    private void storeInFixtureTable(String date, String status, String homeTeamName, String awayTeamName, String goalsHomeTeam, String goalsAwayTeam){
+    private void storeInFixtureTable(){
 //        database = new Database(this);
 //        database.addFixtures(new FixturesTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam));
 
@@ -207,10 +201,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             ContentValues values = new ContentValues();
             values.put(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME, "Arsenal FC");
             values.put(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME, "Watford FC");
-            values.put(SoccerContract.FixturesTable.TAG_DATE, "23/4/2015 " + String.valueOf(i));
-            values.put(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM, "2" + String.valueOf(i));
-            values.put(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM, "1" + String.valueOf(i));
-            values.put(SoccerContract.FixturesTable.TAG_STATUS, "Finished" + String.valueOf(i));
+            values.put(SoccerContract.FixturesTable.TAG_DATE, "23/4/2015 ");
+            values.put(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM, "7");
+            values.put(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM, "4");
+            values.put(SoccerContract.FixturesTable.TAG_STATUS, "Finished");
             Uri uri = getContentResolver().insert(SoccerContract.FixturesTable.CONTENT_URI, values);
 //            getBaseContext().getContentResolver().insert(SoccerContract.FixturesTable.CONTENT_URI, null);
 
@@ -218,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         }
     }
 
-    private void storeInLeagueTable(String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference) {
+    private void storeInLeagueTable() {
 //        database = new Database(this);
 //        database.addLeagueTableData(new LeagueTable( position, teamName, points, goals, goalsAgainst, goalsDifference));
 
@@ -227,11 +221,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             Log.d("INSERT: ", "starting");
             ContentValues values = new ContentValues();
             values.put(SoccerContract.LeagueTable.TAG_TEAM_NAME, "Everton FC");
-            values.put(SoccerContract.LeagueTable.TAG_POSITION, "3 " + String.valueOf(i));
-            values.put(SoccerContract.LeagueTable.TAG_POINTS, "8 " + String.valueOf(i));
-            values.put(SoccerContract.LeagueTable.TAG_GOALS, "12 " + String.valueOf(i));
-            values.put(SoccerContract.LeagueTable.TAG_GOALS_AGAINST, "3 " + String.valueOf(i));
-            values.put(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE, "6 " + String.valueOf(i));
+            values.put(SoccerContract.LeagueTable.TAG_POSITION, "3");
+            values.put(SoccerContract.LeagueTable.TAG_POINTS, "8");
+            values.put(SoccerContract.LeagueTable.TAG_GOALS, "12");
+            values.put(SoccerContract.LeagueTable.TAG_GOALS_AGAINST, "3");
+            values.put(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE, "6");
             Uri uri = getContentResolver().insert(SoccerContract.LeagueTable.CONTENT_URI, values);
 //            getBaseContext().getContentResolver().insert(PhoneContract.SmartPhone.CONTENT_URI, null);
 

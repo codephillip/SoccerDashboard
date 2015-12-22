@@ -23,16 +23,14 @@ public class FixturesCursorAdapter extends CursorAdapter {
     public static class ViewHolder {
         public final TextView homeTeam;
         public final TextView awayTeam;
-        public final TextView goalsHomeTeam;
-        public final TextView goalsAwayTeam;
+        public final TextView score;
         public final TextView date;
 
         public ViewHolder(View view) {
 
             homeTeam = (TextView) view.findViewById(R.id.homeTeam);
             awayTeam = (TextView) view.findViewById(R.id.awayTeam);
-            goalsHomeTeam = (TextView) view.findViewById(R.id.awayTeam);
-            goalsAwayTeam = (TextView) view.findViewById(R.id.awayTeam);
+            score = (TextView) view.findViewById(R.id.score);
             date = (TextView) view.findViewById(R.id.awayTeam);
         }
     }
@@ -87,8 +85,7 @@ public class FixturesCursorAdapter extends CursorAdapter {
         try {
             viewHolder.homeTeam.setText(homeTeam);
             viewHolder.awayTeam.setText(awayTeam);
-//            viewHolder.goalsHomeTeam.setText(goalsHomeTeam);
-//            viewHolder.goalsAwayTeam.setText(goalsAwayTeam);
+            viewHolder.score.setText(goalsHomeTeam +" - "+ goalsAwayTeam);
 //            viewHolder.date.setText(date);
         } catch (Exception e){
             e.printStackTrace();

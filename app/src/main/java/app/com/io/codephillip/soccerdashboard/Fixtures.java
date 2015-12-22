@@ -18,7 +18,6 @@ import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 public class Fixtures extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private ListView fixtureList;
-    private String TAG = Fixtures.class.getSimpleName();
     private final String imageUrls[] = {
             "a/arsenal",
             "a/aston-villa",
@@ -54,11 +53,6 @@ public class Fixtures extends Fragment implements LoaderManager.LoaderCallbacks<
         fixtureList.setAdapter(cursorAdapter);
 		return view;
 	}
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

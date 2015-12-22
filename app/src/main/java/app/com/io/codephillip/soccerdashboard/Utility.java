@@ -7,13 +7,13 @@ public class Utility {
 
     public interface SoccerVaribles{
         //team  data urls
-        final String BarclaysPLTableUrl = "http://api.football-data.org/alpha/soccerseasons/398/leagueTable";
-        final String BarclaysPLFixturesUrl = "http://api.football-data.org/alpha/soccerseasons/398/fixtures";
+        String BarclaysPLTableUrl = "http://api.football-data.org/alpha/soccerseasons/398/leagueTable";
+        String BarclaysPLFixturesUrl = "http://api.football-data.org/alpha/soccerseasons/398/fixtures";
 
 
         //team logos
-        final String imageBaseUrl = "http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/";
-        final String endUrl = "/logo.png/_jcr_content/renditions/cq5dam.thumbnail.55.55.png";
+        String imageBaseUrl = "http://www.premierleague.com/content/dam/premierleague/shared-images/clubs/";
+        String endUrl = "/logo.png/_jcr_content/renditions/cq5dam.thumbnail.55.55.png";
     }
 
 //    private void snackBar(String message){

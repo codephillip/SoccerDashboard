@@ -64,8 +64,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 //            Log.d("URL BUG", e.toString());
 //        }
 
-        storeInFixtureTable(null,null,null,null,null,null);
-        storeInLeagueTable(null,null,null,null,null,null);
+//        storeInFixtureTable(null,null,null,null,null,null);
+//        storeInLeagueTable(null,null,null,null,null,null);
     }
 
     private Void getTableDataJson(String jsonData) throws JSONException {
@@ -159,46 +159,30 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private void storeInLeagueTable(String position, String teamName, String points, String goals, String goalsAgainst, String goalsDifference){
-//        database = new Database(this);
-//        database.addLeagueTableData(new LeagueTable( position, teamName, points, goals, goalsAgainst, goalsDifference));
-
-        int i;
-        for (i = 0; i < 4; i++){
             Log.d("INSERT: ","starting");
             ContentValues values = new ContentValues();
-            values.put(SoccerContract.LeagueTable.TAG_TEAM_NAME, "Chelsea FC");
-            values.put(SoccerContract.LeagueTable.TAG_POSITION, "3 "+String.valueOf(i));
-            values.put(SoccerContract.LeagueTable.TAG_POINTS, "8 " + String.valueOf(i));
-            values.put(SoccerContract.LeagueTable.TAG_GOALS, "12 " + String.valueOf(i));
-            values.put(SoccerContract.LeagueTable.TAG_GOALS_AGAINST, "3 " + String.valueOf(i));
-            values.put(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE, "6 " + String.valueOf(i));
+            values.put(SoccerContract.LeagueTable.TAG_TEAM_NAME, teamName);
+            values.put(SoccerContract.LeagueTable.TAG_POSITION,position);
+            values.put(SoccerContract.LeagueTable.TAG_POINTS, points);
+            values.put(SoccerContract.LeagueTable.TAG_GOALS, goals);
+            values.put(SoccerContract.LeagueTable.TAG_GOALS_AGAINST,goalsAgainst);
+            values.put(SoccerContract.LeagueTable.TAG_GOALS_DIFFERENCE, goalsDifference);
             Uri uri = getContext().getContentResolver().insert(SoccerContract.LeagueTable.CONTENT_URI, values);
-//            getBaseContext().getContentResolver().insert(PhoneContract.SmartPhone.CONTENT_URI, null);
-
             Log.d("INSERT: ", "inserting"+uri.toString());
-        }
 
     }
 
     private void storeInFixtureTable(String date, String status, String homeTeamName, String awayTeamName, String goalsHomeTeam, String goalsAwayTeam){
-//        database = new Database(this);
-//        database.addFixtures(new FixturesTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam));
-
-        int i;
-        for (i = 0; i < 4; i++){
-            Log.d("INSERT: ", "starting");
+            Log.d("INSERT: ","starting");
             ContentValues values = new ContentValues();
-            values.put(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME, "Arsenal FC");
-            values.put(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME, "Watford FC ");
-            values.put(SoccerContract.FixturesTable.TAG_DATE, "23/4/2015 " + String.valueOf(i));
-            values.put(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM, "2" + String.valueOf(i));
-            values.put(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM, "1" + String.valueOf(i));
-            values.put(SoccerContract.FixturesTable.TAG_STATUS, "Finished" + String.valueOf(i));
+            values.put(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME, homeTeamName);
+            values.put(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME, awayTeamName);
+            values.put(SoccerContract.FixturesTable.TAG_DATE, date);
+            values.put(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM, goalsHomeTeam);
+            values.put(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM, goalsAwayTeam);
+            values.put(SoccerContract.FixturesTable.TAG_STATUS, status);
             Uri uri = getContext().getContentResolver().insert(SoccerContract.FixturesTable.CONTENT_URI, values);
-//            getBaseContext().getContentResolver().insert(SoccerContract.FixturesTable.CONTENT_URI, null);
-
             Log.d("INSERT: ", "inserting"+uri.toString());
-        }
     }
 
 
@@ -268,7 +252,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
              * here.
              */
 
-//            onAccountCreated(newAccount, context);
+            onAccountCreated(newAccount, context);
         }
         return newAccount;
     }

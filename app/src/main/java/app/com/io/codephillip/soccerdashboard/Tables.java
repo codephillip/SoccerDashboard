@@ -2,7 +2,6 @@ package app.com.io.codephillip.soccerdashboard;
 
 import android.annotation.TargetApi;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,16 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 import app.com.io.codephillip.soccerdashboard.cursoradapter.TableCursorAdapter;
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 import app.com.io.codephillip.soccerdashboard.database.Database;
 
-public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
-    private String[] tableArray;
+public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private String[] debugTableArray = new String[]{
-            "Arsenal FC","Manchester United FC","Everton FC","Watford FC", "Norwich City FC", "Swansea City FC"
+            "Arsenal FC", "Manchester United FC", "Everton FC", "Watford FC", "Norwich City FC", "Swansea City FC"
     };
     private final String imageUrls[] = {
             "a/arsenal",
@@ -51,9 +48,7 @@ public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cu
     private Database database = null;
     private final String TAG = Tables.class.getSimpleName();
     private TableCursorAdapter cursorAdapter;
-    SimpleCursorAdapter simpleCursorAdapter;
     private static final int LOADER_ID = 1;
-    private Uri allContacts = Uri.parse("content://com.codephillip.intmain.colourcontentprovider/secondary");
 
     public void onPause() {
         super.onPause();
@@ -62,36 +57,16 @@ public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cu
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.tables_layout, container, false);
-
-        Log.d("LOADER", "ONCREATEVIEW_FRAGMENT");
-
-
-        CursorLoader cursorLoader = new CursorLoader(getContext(),
-                SoccerContract.LeagueTable.CONTENT_URI,
-                null, null,null, null
-        );
-        Cursor cursor = cursorLoader.loadInBackground();
-
-        if (cursor.moveToFirst()){
-            do {
-                String name = cursor.getString(cursor.getColumnIndex(SoccerContract.LeagueTable.TAG_TEAM_NAME));
-                Log.d("CURSOR######", name);
-            }while (cursor.moveToNext());
-        }
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.tables_layout, container, false);
 
         cursorAdapter = new TableCursorAdapter(getContext(), null, 0);
-        Log.d("LOADER","starting cursoradapter");
-//
-////        simpleCursorAdapter = new SimpleCursorAdapter(getContext(), R.layout.tables_layout, null, new String[]{"teamName"}, new int[]{R.id.teamname}, 0);
-////        tableList.setAdapter(cursorAdapter);
+        Log.d("LOADER", "starting cursoradapter");
         ListView tableList = (ListView) view.findViewById(R.id.lv_tables);
         tableList.setAdapter(cursorAdapter);
-
-		return view;
-	}
+        return view;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -101,13 +76,12 @@ public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cu
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Log.d("LOADER","ONCREATELOADER");
+        Log.d("LOADER", "ONCREATELOADER");
         return new CursorLoader(
                 getContext(),
-//                allContacts,
                 SoccerContract.LeagueTable.CONTENT_URI,
-                null, null,null, null
-                );
+                null, null, null, null
+        );
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -115,13 +89,11 @@ public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cu
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         Log.d("LOADER", "ONLOADFINISHED");
         cursorAdapter.swapCursor(data);
-//        simpleCursorAdapter.swapCursor(data);
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         cursorAdapter.swapCursor(null);
-//        simpleCursorAdapter.swapCursor(null);
     }
 }
