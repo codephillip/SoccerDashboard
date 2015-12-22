@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
-
-        SyncAdapter.notifyWeather(this);
-        SyncAdapter.initializeSyncAdapter(this);
-//        SyncAdapter.syncImmediately(this);
 //        storeInFixtureTable();
+
+//        SyncAdapter.notifyWeather(this);
+//        SyncAdapter.initializeSyncAdapter(this);
+        SyncAdapter.syncImmediately(this);
 //        storeInLeagueTable();
     }
 
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 //        database.addFixtures(new FixturesTable(date, status, homeTeamName, awayTeamName, goalsHomeTeam, goalsAwayTeam));
 
         int i;
-        for (i = 0; i < 4; i++){
+        for (i = 0; i < 4; i++) {
             Log.d("INSERT: ", "starting");
             ContentValues values = new ContentValues();
             values.put(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME, "Arsenal FC");
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             values.put(SoccerContract.FixturesTable.TAG_DATE, "23/4/2015 ");
             values.put(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM, "7");
             values.put(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM, "4");
-            values.put(SoccerContract.FixturesTable.TAG_STATUS, "Finished");
+            values.put(SoccerContract.FixturesTable.TAG_STATUS, "Timed");
             Uri uri = getContentResolver().insert(SoccerContract.FixturesTable.CONTENT_URI, values);
 //            getBaseContext().getContentResolver().insert(SoccerContract.FixturesTable.CONTENT_URI, null);
 

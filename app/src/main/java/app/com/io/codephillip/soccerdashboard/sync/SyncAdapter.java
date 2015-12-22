@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v4.content.CursorLoader;
 import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -60,6 +59,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         Log.d("SYNCADAPTER", "ONPERFORMSYNC");
 
+        notifyWeather();
         try {
             int k;
             for (k=0; k<2 ; k++){
@@ -69,7 +69,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                     getFixtureDataJson(connectToServer(Utility.SoccerUrls.BarclaysPLFixturesUrl));
                 }
             }
-//            notifyWeather();
+            notifyWeather();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("URL BUG", e.toString());
@@ -286,8 +286,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         getSyncAccount(context);
     }
 
-    public static void notifyWeather(Context context) {
-//        Context context = getContext();
+    public void notifyWeather() {
+        Log.d(TAG, "NOTIFICATION STARTED");
+        Context context = getContext();
         //checking the last update and notify if it' the first of the day
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String lastNotificationKey = context.getString(R.string.pref_last_notification);
@@ -295,40 +296,28 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         if (true) {
 //        if (System.currentTimeMillis() - lastSync >= DAY_IN_MILLIS) {
-            // Last sync was more than 1 day ago, let's send a notification with the weather.
-//            String locationQuery = Utility.getPreferredLocation(context);
 
-//            Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(locationQuery, System.currentTimeMillis());
-
-            // we'll query our contentProvider, as always
-//            Cursor cursor = context.getContentResolver().query(weatherUri, NOTIFY_WEATHER_PROJECTION, null, null, null);
-            CursorLoader cursorLoader = new CursorLoader(context,SoccerContract.FixturesTable.CONTENT_URI, null, null, null, null);
-//            Cursor cursor = context.getContentResolver().query(SoccerContract.LeagueTable.CONTENT_URI, null, null, null, null);
-            Cursor cursor = cursorLoader.loadInBackground();
-//
+            Cursor cursor = context.getContentResolver().query(SoccerContract.FixturesTable.CONTENT_URI, null, null, null, null);
             if (cursor.moveToFirst()) {
+                while(cursor.moveToNext() && cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_STATUS)).equals("Finished")){
+                    Log.d(TAG, "LOOPING");
+                }
                 String homeTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_HOME_TEAM_NAME));
                 String awayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME));
                 String goalsHomeTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM));
                 String goalsAwayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM));
                 String date = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_DATE));
+                String status = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_STATUS));
                 Log.d("CURSOR_bindview", homeTeam);
                 Log.d("CURSOR_bindview", awayTeam);
                 int iconId = R.mipmap.ic_launcher;
                 String title = context.getString(R.string.app_name);
 
-                // Define the text of the forecast.
-//                String contentText = String.format(context.getString(R.string.format_notification),
-//                        desc,
-//                        Utility.formatTemperature(context, high),
-//                        Utility.formatTemperature(context, low));
-//                String contentText = homeTeam + "VS "+ awayTeam + " at "+ date;
-                String contentText = "notification";
+                String contentText = homeTeam + " VS "+ awayTeam + " at "+ date + status;
 
                 // NotificationCompatBuilder is a very convenient way to build backward-compatible
                 // notifications.  Just throw in some data.
                 NotificationCompat.Builder mBuilder =
-//                        new NotificationCompat.Builder(getContext())
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(iconId)
                                 .setContentTitle(title)
@@ -364,6 +353,5 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
     }
-
 }
 

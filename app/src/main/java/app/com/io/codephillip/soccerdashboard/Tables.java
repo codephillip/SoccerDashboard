@@ -19,31 +19,6 @@ import app.com.io.codephillip.soccerdashboard.cursoradapter.TableCursorAdapter;
 import app.com.io.codephillip.soccerdashboard.data.SoccerContract;
 
 public class Tables extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    private String[] debugTableArray = new String[]{
-            "Arsenal FC", "Manchester United FC", "Everton FC", "Watford FC", "Norwich City FC", "Swansea City FC"
-    };
-    private final String imageUrls[] = {
-            "a/arsenal",
-            "a/aston-villa",
-            "b/bournemouth",
-            "c/chelsea",
-            "c/crystal-palace",
-            "e/everton",
-            "l/leicester",
-            "l/liverpool",
-            "m/man-city",
-            "m/man-utd",
-            "n/newcastle",
-            "n/norwich",
-            "s/southampton",
-            "s/stoke",
-            "s/sunderland",
-            "s/swansea",
-            "s/spurs",
-            "w/watford",
-            "w/west-brom",
-            "w/west-ham",
-    };
     private final String TAG = Tables.class.getSimpleName();
     private TableCursorAdapter cursorAdapter;
     private static final int LOADER_ID = 1;
