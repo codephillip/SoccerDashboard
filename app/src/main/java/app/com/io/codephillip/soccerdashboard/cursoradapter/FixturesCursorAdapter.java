@@ -68,11 +68,22 @@ public class FixturesCursorAdapter extends CursorAdapter {
         int layoutId = -1;
 
         if (viewType == VIEW_TYPE_TITLE){
-            layoutId = R.layout.table_row_title;
+            layoutId = R.layout.fixtures_row_title;
         }
         else if (viewType == VIEW_TYPE_BODY){
             layoutId = R.layout.fixtures_table_row;
         }
+//     TODO place date strips in the fixtures tab
+//        int layoutId = -1;
+//
+//        String status = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_STATUS));
+//
+//        if (status.equals("Timed")){
+//            layoutId = R.layout.table_row_title;
+//        }
+//        else if (status.equals("Finished")){
+//            layoutId = R.layout.fixtures_table_row;
+//        }
 
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -86,7 +97,7 @@ public class FixturesCursorAdapter extends CursorAdapter {
         String awayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_AWAY_TEAM_NAME));
         String goalsHomeTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_HOME_TEAM));
         String goalsAwayTeam = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_GOALS_AWAY_TEAM));
-        String date = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_DATE));
+//        String date = cursor.getString(cursor.getColumnIndex(SoccerContract.FixturesTable.TAG_DATE));
         Log.d("CURSOR_bindview", homeTeam);
         Log.d("CURSOR_bindview", awayTeam);
 
@@ -96,7 +107,7 @@ public class FixturesCursorAdapter extends CursorAdapter {
             viewHolder.homeTeam.setText(homeTeam);
             viewHolder.awayTeam.setText(awayTeam);
             viewHolder.score.setText(goalsHomeTeam + " - " + goalsAwayTeam);
-            viewHolder.date.setText(Utility.timeTruncate(date));
+//            viewHolder.date.setText(Utility.timeTruncate(date));
 
             Log.d("PicassoLoader", "initiating" + n);
             for (n = 0; n < 2; n++) {
@@ -116,6 +127,5 @@ public class FixturesCursorAdapter extends CursorAdapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
